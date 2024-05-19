@@ -14,7 +14,7 @@ export const useProfile = (username) => {
 
         if (!token || !apiKey) {
           setError(
-            "Authentication credentials are not available. Please login again."
+            "Authentication credentials are not available. Please login again.",
           );
           setIsLoading(false);
           return;

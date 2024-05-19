@@ -8,7 +8,7 @@ export const useEditProfile = (username) => {
     bio: "",
     venueManager: false,
     avatar: { url: "", alt: "User avatar" },
-    banner: { url: "", alt: "Profile banner" }
+    banner: { url: "", alt: "Profile banner" },
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -57,6 +57,6 @@ export const useEditProfile = (username) => {
     isLoading,
     error,
     setProfile,
-    updateProfileData
+    updateProfileData,
   };
 };

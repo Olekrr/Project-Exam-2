@@ -14,7 +14,7 @@ const EditProfile = () => {
     const { name, value } = e.target;
     setProfile((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 

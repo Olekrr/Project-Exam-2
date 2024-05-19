@@ -7,7 +7,7 @@ const VenueCard = ({ venue }) => (
     <Link to={`/venues/${venue.id}`}>
       <h2>{venue.name}</h2>
       <img src={venue.media[0]?.url} alt={venue.media[0]?.alt || venue.name} />
-      <p>{venue.description}</p>
+      <p>{venue.description}</p>,
     </Link>
   </div>
 );
@@ -20,7 +20,7 @@ VenueCard.propTypes = {
       PropTypes.shape({
         url: PropTypes.string,
         alt: PropTypes.string,
-      })
+      }),
     ).isRequired,
     description: PropTypes.string.isRequired,
   }).isRequired,
