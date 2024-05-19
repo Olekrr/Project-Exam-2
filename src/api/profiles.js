@@ -9,7 +9,7 @@ export const getProfileByName = (name, accessToken, apiKey) => {
     "GET",
     accessToken,
     null,
-    apiKey,
+    apiKey
   );
 };
 
@@ -19,7 +19,7 @@ export const updateProfile = (name, profileData, accessToken, apiKey) =>
     "PUT",
     accessToken,
     profileData,
-    apiKey,
+    apiKey
   );
 
 export const getProfileBookings = (name, accessToken, apiKey) =>
@@ -28,7 +28,7 @@ export const getProfileBookings = (name, accessToken, apiKey) =>
     "GET",
     accessToken,
     null,
-    apiKey,
+    apiKey
   );
 
 export const getProfileVenues = (name, accessToken, apiKey) =>
@@ -37,7 +37,7 @@ export const getProfileVenues = (name, accessToken, apiKey) =>
     "GET",
     accessToken,
     null,
-    apiKey,
+    apiKey
   );
 
 export const searchProfiles = (query, accessToken, apiKey) =>
@@ -46,5 +46,5 @@ export const searchProfiles = (query, accessToken, apiKey) =>
     "GET",
     accessToken,
     null,
-    apiKey,
+    apiKey
   );

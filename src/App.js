@@ -6,6 +6,8 @@ import Login from "./components/auth/login/Login";
 import Register from "./components/auth/register/Register";
 import Profile from "./components/pages/profile/Profile";
 import EditProfile from "./components/pages/profile/editProfile/EditProfile";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
 function App() {
   return (

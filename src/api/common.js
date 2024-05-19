@@ -5,7 +5,7 @@ export const apiRequest = async (
   method,
   accessToken = null,
   body = null,
-  apiKey = null,
+  apiKey = null
 ) => {
   const headers = new Headers({
     "Content-Type": "application/json",
@@ -28,8 +28,7 @@ export const apiRequest = async (
       let errorText = "API request failed";
       if (contentType && contentType.includes("application/json")) {
         const data = await response.json();
-        errorText =
-          data.message || `API request failed with status: ${response.status}`;
+        errorText = data.message || `API request failed with status: ${response.status}`;
       } else {
         errorText = await response.text();
       }
