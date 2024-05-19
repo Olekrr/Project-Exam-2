@@ -8,7 +8,7 @@ const Register = () => {
     name: "",
     email: "",
     password: "",
-    venueManager: false,
+    venueManager: false
   };
 
   const { formData, error, handleChange, handleSubmit } =

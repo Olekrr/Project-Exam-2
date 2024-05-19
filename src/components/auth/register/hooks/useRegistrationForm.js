@@ -11,7 +11,7 @@ const useRegistrationForm = (initialState) => {
     const { id, value, checked, type } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [id]: type === "checkbox" ? checked : value,
+      [id]: type === "checkbox" ? checked : value
     }));
   };
 
@@ -33,7 +33,7 @@ const useRegistrationForm = (initialState) => {
     formData,
     error,
     handleChange,
-    handleSubmit,
+    handleSubmit
   };
 };
 
