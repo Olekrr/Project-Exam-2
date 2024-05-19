@@ -4,8 +4,10 @@ import Layout from "./components/layout/Layout";
 import Home from "./components/pages/home/Home";
 import Login from "./components/auth/login/Login";
 import Register from "./components/auth/register/Register";
+import Profile from "./components/pages/profile/Profile";
+import EditProfile from "./components/pages/profile/editProfile/EditProfile";
 
-const App = () => {
+function App() {
   return (
     <Router>
       <Layout>
@@ -13,11 +15,12 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          {/* Add other routes here */}
+          <Route path="/profile/:username" element={<Profile />} />
+          <Route path="/profile/:username/edit" element={<EditProfile />} />
         </Routes>
       </Layout>
     </Router>
   );
-};
+}
 
 export default App;

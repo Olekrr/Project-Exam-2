@@ -3,15 +3,15 @@ const API_URL = "https://v2.api.noroff.dev";
 export const apiRequest = async (
   endpoint,
   method,
-  accessToken,
-  apiKey,
+  accessToken = null,
   body = null,
+  apiKey = null,
 ) => {
-  const headers = {
+  const headers = new Headers({
     "Content-Type": "application/json",
-    Authorization: accessToken ? `Bearer ${accessToken}` : "",
-    "X-Noroff-API-Key": apiKey || "",
-  };
+    ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
+    ...(apiKey && { "X-Noroff-API-Key": apiKey }),
+  });
 
   const options = {
     method,
@@ -24,10 +24,20 @@ export const apiRequest = async (
   try {
     const response = await fetch(url, options);
     if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "API request failed");
+      const contentType = response.headers.get("content-type");
+      let errorText = "API request failed";
+      if (contentType && contentType.includes("application/json")) {
+        const data = await response.json();
+        errorText =
+          data.message || `API request failed with status: ${response.status}`;
+      } else {
+        errorText = await response.text();
+      }
+      console.error("API request failed:", errorText);
+      throw new Error(errorText);
     }
-    return await response.json();
+    const data = await response.json();
+    return data;
   } catch (error) {
     console.error("API request error:", error);
     throw error;
