@@ -1,26 +1,38 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Navbar, Nav, Container } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import { Navbar, Nav } from "react-bootstrap";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const username = localStorage.getItem("username");
+
+  const handleProfileClick = () => {
+    if (username) {
+      navigate(`/profile/${username}`);
+    } else {
+      navigate("/login");
+    }
+  };
+
   return (
-    <header>
-      <Navbar bg="dark" variant="dark" expand="lg">
-        <Container>
-          <Navbar.Brand as={Link} to="/">
-            Holidaze
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link as={Link} to="/">
-                Home
-              </Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-    </header>
+    <Navbar bg="light" expand="lg">
+      <Navbar.Brand href="/">Holidaze</Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="me-auto">
+          <Nav.Link as={Link} to="/">
+            Home
+          </Nav.Link>
+          <Nav.Link as={Link} to="/login">
+            Login
+          </Nav.Link>
+          <Nav.Link as={Link} to="/register">
+            Register
+          </Nav.Link>
+          <Nav.Link onClick={handleProfileClick}>Profile</Nav.Link>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
   );
 };
 

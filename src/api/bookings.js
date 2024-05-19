@@ -12,7 +12,7 @@ export const updateBooking = (id, bookingData, accessToken, apiKey) =>
     "PUT",
     accessToken,
     apiKey,
-    bookingData
+    bookingData,
   );
 export const deleteBooking = (id, accessToken, apiKey) =>
   apiRequest(`/holidaze/bookings/${id}`, "DELETE", accessToken, apiKey);
