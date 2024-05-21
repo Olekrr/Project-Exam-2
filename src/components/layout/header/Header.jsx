@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Navbar, Nav } from "react-bootstrap";
+import { logout } from "../../auth/logout/logout";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -12,6 +13,11 @@ const Header = () => {
     } else {
       navigate("/login");
     }
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
   };
 
   return (
@@ -26,13 +32,21 @@ const Header = () => {
           <Nav.Link as={Link} to="/venues">
             Venues
           </Nav.Link>
-          <Nav.Link as={Link} to="/login">
-            Login
-          </Nav.Link>
-          <Nav.Link as={Link} to="/register">
-            Register
-          </Nav.Link>
-          <Nav.Link onClick={handleProfileClick}>Profile</Nav.Link>
+          {username ? (
+            <>
+              <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+              <Nav.Link onClick={handleProfileClick}>Profile</Nav.Link>
+            </>
+          ) : (
+            <>
+              <Nav.Link as={Link} to="/login">
+                Login
+              </Nav.Link>
+              <Nav.Link as={Link} to="/register">
+                Register
+              </Nav.Link>
+            </>
+          )}
         </Nav>
       </Navbar.Collapse>
     </Navbar>
