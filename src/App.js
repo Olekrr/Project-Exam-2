@@ -6,8 +6,11 @@ import Login from "./components/auth/login/Login";
 import Register from "./components/auth/register/Register";
 import Profile from "./components/pages/profile/Profile";
 import EditProfile from "./components/pages/profile/editProfile/EditProfile";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
+import Venues from "./components/pages/venues/Venues";
+import VenueDetails from "./components/pages/venuedetails/VenueDetails";
+import ManageVenues from "./components/pages/venues/managevenues/ManageVenues";
+import CreateVenue from "./components/pages/venues/managevenues/components/createvenue/CreateVenue";
+import EditVenue from "./components/pages/venues/managevenues/components/editvenue/EditVenue";
 
 function App() {
   return (
@@ -19,6 +22,20 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/profile/:username" element={<Profile />} />
           <Route path="/profile/:username/edit" element={<EditProfile />} />
+          <Route
+            path="/profile/:username/manage-venues"
+            element={<ManageVenues />}
+          />
+          <Route
+            path="/profile/:username/manage-venues/create"
+            element={<CreateVenue />}
+          />
+          <Route
+            path="/profile/:username/manage-venues/edit/:venueId"
+            element={<EditVenue />}
+          />
+          <Route path="/venues" element={<Venues />} />
+          <Route path="/venues/:id" element={<VenueDetails />} />
         </Routes>
       </Layout>
     </Router>

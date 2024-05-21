@@ -14,14 +14,16 @@ const Profile = () => {
     navigate(`/profile/${username}/edit`);
   };
 
+  const handleManageVenues = () => {
+    navigate(`/profile/${username}/manage-venues`);
+  };
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
-
   if (error) {
     return <div className="alert alert-danger">{error}</div>;
   }
-
   if (!profile) {
     return <div>No profile data available.</div>;
   }
@@ -43,6 +45,14 @@ const Profile = () => {
           <button className="btn btn-primary mt-3" onClick={handleEdit}>
             Edit Profile
           </button>
+          {profile.venueManager && (
+            <button
+              className="btn btn-secondary mt-3"
+              onClick={handleManageVenues}
+            >
+              Manage Venues
+            </button>
+          )}
         </div>
       </div>
     </div>
