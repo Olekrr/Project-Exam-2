@@ -9,10 +9,10 @@ VenueMedia.propTypes = {
   media: PropTypes.arrayOf(
     PropTypes.shape({
       url: PropTypes.string.isRequired,
-      alt: PropTypes.string,
-    }),
+      alt: PropTypes.string
+    })
   ).isRequired,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
 };
 
 export default VenueMedia;

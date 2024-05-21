@@ -19,11 +19,11 @@ VenueCard.propTypes = {
     media: PropTypes.arrayOf(
       PropTypes.shape({
         url: PropTypes.string,
-        alt: PropTypes.string,
-      }),
+        alt: PropTypes.string
+      })
     ).isRequired,
-    description: PropTypes.string.isRequired,
-  }).isRequired,
+    description: PropTypes.string.isRequired
+  }).isRequired
 };
 
 export default VenueCard;

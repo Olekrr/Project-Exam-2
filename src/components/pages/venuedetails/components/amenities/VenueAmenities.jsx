@@ -16,7 +16,7 @@ const VenueAmenities = ({ meta }) => (
 );
 
 VenueAmenities.propTypes = {
-  meta: PropTypes.object.isRequired,
+  meta: PropTypes.object.isRequired
 };
 
 export default VenueAmenities;

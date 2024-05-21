@@ -14,7 +14,7 @@ VenueInfo.propTypes = {
   description: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   maxGuests: PropTypes.number.isRequired,
-  rating: PropTypes.number.isRequired,
+  rating: PropTypes.number.isRequired
 };
 
 export default VenueInfo;

@@ -13,7 +13,7 @@ const VenueLocation = ({ address, city, country }) => (
 VenueLocation.propTypes = {
   address: PropTypes.string.isRequired,
   city: PropTypes.string.isRequired,
-  country: PropTypes.string.isRequired,
+  country: PropTypes.string.isRequired
 };
 
 export default VenueLocation;
