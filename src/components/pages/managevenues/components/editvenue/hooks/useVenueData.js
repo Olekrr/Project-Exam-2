@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getVenueById, updateVenue } from "../../../../../../../api/venues";
+import { getVenueById, updateVenue } from "../../../../../../api/venues";
 
 const defaultVenueData = {
   name: "",

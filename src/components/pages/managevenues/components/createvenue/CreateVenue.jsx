@@ -1,9 +1,9 @@
 import React from "react";
 import useFormState from "./hooks/useFormState";
 import useSubmitVenue from "./hooks/useSubmitVenue";
-import TextInput from "../../../../../utils/textInput/textInput";
-import TextAreaInput from "../../../../../utils/textAreaInput/TextAreaInput";
-import CheckboxInput from "../../../../../utils/checkboxInput/CheckboxInput";
+import TextInput from "../../../../utils/textInput/textInput";
+import TextAreaInput from "../../../../utils/textAreaInput/TextAreaInput";
+import CheckboxInput from "../../../../utils/checkboxInput/CheckboxInput";
 
 const initialState = {
   name: "",

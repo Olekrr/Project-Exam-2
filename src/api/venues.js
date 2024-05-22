@@ -1,7 +1,12 @@
 import { apiRequest } from "./common";
 
 export const getAllVenues = async () => {
-  const response = await apiRequest("/holidaze/venues", "GET", null, null);
+  const sortField = "updated";
+  const sortOrder = "desc";
+  const limit = 100;
+  const page = 1;
+  const url = `/holidaze/venues?sort=${sortField}&sortOrder=${sortOrder}&limit=${limit}&page=${page}`;
+  const response = await apiRequest(url, "GET", null, null);
   return response.data || [];
 };
 
