@@ -8,9 +8,10 @@ import Profile from "./components/pages/profile/Profile";
 import EditProfile from "./components/pages/profile/editProfile/EditProfile";
 import Venues from "./components/pages/venues/Venues";
 import VenueDetails from "./components/pages/venuedetails/VenueDetails";
-import ManageVenues from "./components/pages/venues/managevenues/ManageVenues";
-import CreateVenue from "./components/pages/venues/managevenues/components/createvenue/CreateVenue";
-import EditVenue from "./components/pages/venues/managevenues/components/editvenue/EditVenue";
+import ManageVenues from "./components/pages/managevenues/ManageVenues";
+import CreateVenue from "./components/pages/managevenues/components/createvenue/CreateVenue";
+import EditVenue from "./components/pages/managevenues/components/editvenue/EditVenue";
+import BookingPage from "./components/pages/booking/BookingPage";
 
 function App() {
   return (
@@ -36,6 +37,8 @@ function App() {
           />
           <Route path="/venues" element={<Venues />} />
           <Route path="/venues/:id" element={<VenueDetails />} />
+          <Route path="/booking/:venueId" element={<BookingPage />} />{" "}
+          {/* New route for booking */}
         </Routes>
       </Layout>
     </Router>
