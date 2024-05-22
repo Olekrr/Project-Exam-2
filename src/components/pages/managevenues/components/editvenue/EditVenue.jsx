@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import TextInput from "../../../../../utils/textInput/textInput";
-import TextAreaInput from "../../../../../utils/textAreaInput/TextAreaInput";
+import TextInput from "../../../../utils/textInput/textInput";
+import TextAreaInput from "../../../../utils/textAreaInput/TextAreaInput";
 import { useVenueData } from "./hooks/useVenueData";
 import useForm from "./hooks/useForm";
 import useAuthNavigation from "./hooks/useAuthNavigation";

@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import useVenue from "./hooks/useVenue";
 import VenueMedia from "./components/media/VenueMedia";
 import VenueInfo from "./components/info/VenueInfo";
@@ -8,7 +8,12 @@ import VenueLocation from "./components/location/VenueLocation";
 
 const VenueDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { venue, loading, error } = useVenue(id);
+
+  const handleBookNow = () => {
+    navigate(`/booking/${id}`);
+  };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
@@ -29,6 +34,9 @@ const VenueDetails = () => {
         city={venue.location.city}
         country={venue.location.country}
       />
+      <button onClick={handleBookNow} className="btn btn-primary">
+        Book Now
+      </button>
     </div>
   );
 };
