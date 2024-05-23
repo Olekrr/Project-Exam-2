@@ -1,7 +1,6 @@
-// VenueBookings.jsx
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getAllBookings } from "../../../../../api/bookings"; // Adjust path as necessary
+import { getAllBookings } from "../../../../../api/bookings";
 
 const VenueBookings = () => {
   const { venueId } = useParams();
