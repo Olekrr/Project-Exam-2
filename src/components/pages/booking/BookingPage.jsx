@@ -1,44 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import FullCalendar from "@fullcalendar/react";
-import interactionPlugin from "@fullcalendar/interaction";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import { getAllBookings, createBooking } from "../../../api/bookings";
-import TextInput from "../../utils/textInput/textInput";
-import "./bookingPage.sass";
+import { createBooking } from "../../../api/bookings";
+import { useBookings } from "./hooks/useBookings";
+import BookingCalendar from "./components/calendar/Calendar";
+import BookingForm from "./components/bookingform/BookingForm";
 
 const BookingPage = () => {
   const { venueId } = useParams();
-  const [events, setEvents] = useState([]);
+  const { bookings, loading, error, fetchBookings } = useBookings(venueId);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [guests, setGuests] = useState(1);
   const [maxGuests, setMaxGuests] = useState(10);
-
-  useEffect(() => {
-    fetchBookings();
-  }, [venueId]);
-
-  const fetchBookings = async () => {
-    const accessToken = localStorage.getItem("accessToken");
-    const apiKey = localStorage.getItem("apiKey");
-    try {
-      const fetchedBookings = await getAllBookings(accessToken, apiKey);
-      const filteredBookings = fetchedBookings.data.filter(
-        (booking) => booking.venue && booking.venue.id === venueId
-      );
-      const events = filteredBookings.map((booking) => ({
-        title: `Booked - Guests: ${booking.guests}`,
-        start: booking.dateFrom,
-        end: booking.dateTo,
-        allDay: true,
-        color: "red"
-      }));
-      setEvents(events);
-    } catch (error) {
-      console.error("Failed to fetch bookings:", error);
-    }
-  };
 
   const handleDateSelect = (selectInfo) => {
     setStartDate(selectInfo.startStr);
@@ -54,6 +27,7 @@ const BookingPage = () => {
       guests: Number(guests),
       venueId
     };
+
     try {
       await createBooking(bookingData, accessToken, apiKey);
       alert("Booking created successfully!");
@@ -64,37 +38,30 @@ const BookingPage = () => {
     }
   };
 
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
+
+  const events = bookings.map((booking) => ({
+    title: `Booked - Guests: ${booking.guests}`,
+    start: booking.dateFrom,
+    end: booking.dateTo,
+    allDay: true,
+    color: "red"
+  }));
+
   return (
     <div>
       <h2>Book Your Stay at Venue {venueId}</h2>
       <p>
         Please click or drag across the dates you want to book on the calendar.
       </p>
-      <div className="custom-calendar">
-        <FullCalendar
-          plugins={[dayGridPlugin, interactionPlugin]}
-          initialView="dayGridMonth"
-          events={events}
-          dayMaxEvents={true}
-          selectable={true}
-          select={handleDateSelect}
-          aspectRatio={1.5}
-          selectMirror={true}
-          unselectAuto={false}
-        />
-      </div>
-      <TextInput
-        label="Number of Guests"
-        id="guests"
-        type="number"
-        value={guests}
-        onChange={(e) => setGuests(e.target.value)}
-        min="1"
-        max={maxGuests.toString()}
+      <BookingCalendar events={events} onSelectDate={handleDateSelect} />
+      <BookingForm
+        guests={guests}
+        maxGuests={maxGuests}
+        onChangeGuests={(e) => setGuests(e.target.value)}
+        onCreateBooking={handleCreateBooking}
       />
-      <button onClick={handleCreateBooking} className="btn btn-primary">
-        Confirm Booking
-      </button>
     </div>
   );
 };

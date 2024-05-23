@@ -14,6 +14,10 @@ const ManageVenues = () => {
     navigate(`/profile/${username}/manage-venues/create`);
   };
 
+  const handleViewBookings = (venueId) => {
+    navigate(`/profile/${username}/manage-venues/${venueId}/bookings`);
+  };
+
   return (
     <div className="manage-venues">
       <h1>Manage Venues</h1>
@@ -21,7 +25,7 @@ const ManageVenues = () => {
       <button onClick={handleCreateVenue} className="btn btn-primary">
         Add New Venue
       </button>
-      <VenueList username={username} />
+      <VenueList username={username} onViewBookings={handleViewBookings} />
       <button onClick={handleBackToProfile} className="btn btn-secondary">
         Back to Profile
       </button>

@@ -5,7 +5,6 @@ export const getAllBookings = (accessToken, apiKey) => {
   const sortOrder = "desc";
   const limit = 100;
   const page = 1;
-  // Include the _venue parameter to fetch venue details with bookings
   const url = `/holidaze/bookings?sort=${sortField}&sortOrder=${sortOrder}&limit=${limit}&page=${page}&_venue=true`;
   return apiRequest(url, "GET", accessToken, null, apiKey);
 };

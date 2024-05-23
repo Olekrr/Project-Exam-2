@@ -1,4 +1,6 @@
-const Venue = ({ venue, onEdit, onDelete }) => {
+import React from "react";
+
+const Venue = ({ venue, onEdit, onDelete, onViewBookings }) => {
   return (
     <div key={venue.id}>
       <h3>{venue.name}</h3>
@@ -16,7 +18,11 @@ const Venue = ({ venue, onEdit, onDelete }) => {
       <button onClick={() => onDelete(venue.id)} className="btn btn-danger">
         Delete
       </button>
+      <button onClick={() => onViewBookings(venue.id)} className="btn btn-info">
+        View Bookings
+      </button>
     </div>
   );
 };
+
 export default Venue;

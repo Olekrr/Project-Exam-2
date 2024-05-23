@@ -18,6 +18,10 @@ const Profile = () => {
     navigate(`/profile/${username}/manage-venues`);
   };
 
+  const handleViewBookings = () => {
+    navigate(`/profile/${username}/bookings`);
+  };
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -45,12 +49,16 @@ const Profile = () => {
           <button className="btn btn-primary mt-3" onClick={handleEdit}>
             Edit Profile
           </button>
-          {profile.venueManager && (
+          {profile.venueManager ? (
             <button
               className="btn btn-secondary mt-3"
               onClick={handleManageVenues}
             >
               Manage Venues
+            </button>
+          ) : (
+            <button className="btn btn-info mt-3" onClick={handleViewBookings}>
+              View Your Bookings
             </button>
           )}
         </div>
