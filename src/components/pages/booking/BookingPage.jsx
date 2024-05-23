@@ -11,7 +11,7 @@ const BookingPage = () => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [guests, setGuests] = useState(1);
-  const [maxGuests, setMaxGuests] = useState(10);
+  const [maxGuests] = useState(10);
 
   const handleDateSelect = (selectInfo) => {
     setStartDate(selectInfo.startStr);

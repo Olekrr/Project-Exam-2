@@ -21,7 +21,9 @@ const EditProfile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const updated = await updateProfileData(profile);
-    if (updated) navigate(`/profile/${username}`);
+    if (updated) {
+      navigate(`/profile-update-success`);
+    }
   };
 
   if (isLoading) return <div>Loading...</div>;
