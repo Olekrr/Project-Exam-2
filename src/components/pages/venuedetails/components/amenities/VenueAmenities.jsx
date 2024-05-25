@@ -1,14 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "./venueamenities.scss";
 
 const VenueAmenities = ({ meta }) => (
-  <div>
+  <div className="venue-amenities">
     <h3>Amenities:</h3>
     <ul>
       {meta &&
         Object.keys(meta).map((key) => (
           <li key={key}>
-            {key}: {meta[key] ? "Yes" : "No"}
+            {key.charAt(0).toUpperCase() + key.slice(1)}:{" "}
+            {meta[key] ? "Yes" : "No"}
           </li>
         ))}
     </ul>

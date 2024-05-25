@@ -1,0 +1,43 @@
+$theme-colors: (
+  "primary": #ff5e00,
+  "success": #28a745,
+  "info": #ffffff,
+  "warning": #ffc107,
+  "danger": #dc3545,
+  "light": #f8f9fa,
+  "dark": #343a40
+);
+
+@font-face {
+  font-family: "Bebas Neue";
+  src: url("../assets/fonts/Bebas_Neue/BebasNeue-Regular.ttf")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins/Poppins-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@import "~bootstrap/scss/bootstrap";
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Bebas Neue", sans-serif;
+}
+
+.navbar {
+  font-family: "Poppins", sans-serif;
+}

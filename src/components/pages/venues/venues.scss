@@ -1,0 +1,29 @@
+@import "../../../styles/main.scss";
+
+.container {
+  max-width: 1200px;
+  padding: 2rem;
+}
+
+.text-center {
+  h1 {
+    font-size: 2.5rem;
+    color: map-get($theme-colors, "dark");
+  }
+
+  .lead {
+    font-size: 1.25rem;
+    color: #6c757d;
+  }
+}
+
+a {
+  color: map-get($theme-colors, "primary");
+  &:hover {
+    color: darken(map-get($theme-colors, "primary"), 10%);
+  }
+}
+
+.row {
+  margin-top: 2rem;
+}

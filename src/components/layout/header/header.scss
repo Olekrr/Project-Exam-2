@@ -1,0 +1,71 @@
+@import "../../../styles/main.scss";
+
+.navbar {
+  background-color: transparent;
+  z-index: 10;
+
+  .nav-link {
+    color: map-get($theme-colors, "dark");
+    position: relative;
+    &:hover {
+      color: map-get($theme-colors, "primary");
+    }
+
+    &.active::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 4px;
+      background-color: map-get($theme-colors, "primary");
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+    }
+  }
+
+  .navbar-toggler {
+    border-color: map-get($theme-colors, "primary");
+  }
+
+  .navbar-collapse {
+    justify-content: flex-end; /* Ensure alignment to the right */
+  }
+
+  .nav-item {
+    margin-left: 1rem;
+  }
+
+  .nav-buttons {
+    display: flex;
+    align-items: center;
+
+    .nav-link {
+      margin-right: 1rem;
+    }
+
+    .nav-link-login {
+      border: 1px solid map-get($theme-colors, "dark");
+      color: map-get($theme-colors, "dark");
+      background-color: transparent;
+      margin-right: 1rem;
+      padding: 0.5rem 1.5rem;
+      border-radius: 30px;
+
+      &:hover {
+        color: map-get($theme-colors, "primary");
+        border-color: map-get($theme-colors, "primary");
+      }
+    }
+
+    .nav-link-register {
+      background-color: map-get($theme-colors, "primary");
+      color: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 30px;
+
+      &:hover {
+        background-color: darken(map-get($theme-colors, "primary"), 10%);
+      }
+    }
+  }
+}

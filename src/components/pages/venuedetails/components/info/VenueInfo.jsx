@@ -1,12 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "./venueinfo.scss";
 
 const VenueInfo = ({ description, price, maxGuests, rating }) => (
   <div className="venue-info">
-    <p>{description}</p>
-    <p>Price: ${price}</p>
-    <p>Max Guests: {maxGuests}</p>
-    <p>Rating: {rating}</p>
+    <p className="description">{description}</p>
+    <p className="info">Price: ${price}</p>
+    <p className="info">Max Guests: {maxGuests}</p>
+    <p className="info">Rating: {rating}</p>
   </div>
 );
 

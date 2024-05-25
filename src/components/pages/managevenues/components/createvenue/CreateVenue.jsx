@@ -4,6 +4,7 @@ import useSubmitVenue from "./hooks/useSubmitVenue";
 import TextInput from "../../../../utils/textInput/textInput";
 import TextAreaInput from "../../../../utils/textAreaInput/TextAreaInput";
 import CheckboxInput from "../../../../utils/checkboxInput/CheckboxInput";
+import "./createvenue.scss";
 
 const initialState = {
   name: "",
@@ -33,13 +34,14 @@ const CreateVenue = () => {
   const currentUsername = localStorage.getItem("username");
 
   return (
-    <div className="create-venue">
+    <div className="create-venue container mt-5">
       <h1>Create Venue</h1>
       <form
         onSubmit={(e) => {
           e.preventDefault();
           handleSubmit(venueData, currentUsername);
         }}
+        className="mt-4"
       >
         <TextInput
           label="Venue Name"
@@ -150,7 +152,7 @@ const CreateVenue = () => {
           value={venueData.location.continent}
           onChange={handleChange}
         />
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary mt-3">
           Create Venue
         </button>
       </form>

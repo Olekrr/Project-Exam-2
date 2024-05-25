@@ -1,0 +1,35 @@
+@import "../../../../../styles/main.scss";
+
+.venue-bookings {
+  h1 {
+    color: map-get($theme-colors, "dark");
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .list-group {
+    margin-top: 1rem;
+
+    .list-group-item {
+      padding: 1rem;
+      margin-bottom: 0.5rem;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      background-color: #f8f9fa;
+
+      .booking-info {
+        display: flex;
+        justify-content: space-between;
+
+        .booking-dates,
+        .booking-details {
+          width: 45%;
+        }
+
+        strong {
+          color: map-get($theme-colors, "dark");
+        }
+      }
+    }
+  }
+}
