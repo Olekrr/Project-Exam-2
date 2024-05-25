@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getAllBookings } from "../../../../../api/bookings";
+import { useAuth } from "../../../../../contexts/authContext";
 import "./venuebookings.scss";
 
 const VenueBookings = () => {
   const { venueId } = useParams();
+  const { authData } = useAuth();
   const [bookings, setBookings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchAllBookings = async () => {
-      const accessToken = localStorage.getItem("accessToken");
-      const apiKey = localStorage.getItem("apiKey");
       try {
-        const result = await getAllBookings(accessToken, apiKey);
+        const result = await getAllBookings(
+          authData.accessToken,
+          authData.apiKey
+        );
         if (result && result.data) {
           const filteredBookings = result.data.filter(
             (booking) => booking.venue && booking.venue.id === venueId
@@ -31,7 +34,7 @@ const VenueBookings = () => {
     };
 
     fetchAllBookings();
-  }, [venueId]);
+  }, [venueId, authData.accessToken, authData.apiKey]);
 
   const formatDate = (dateString) => {
     const options = { year: "numeric", month: "long", day: "numeric" };

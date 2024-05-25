@@ -63,7 +63,7 @@ const EditBooking = () => {
             </button>
             <button
               type="button"
-              className="btn "
+              className="btn"
               onClick={() => navigate(`/profile`)}
             >
               Back to Profile

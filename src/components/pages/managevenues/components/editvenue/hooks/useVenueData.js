@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getVenueById, updateVenue } from "../../../../../../api/venues";
+import { useAuth } from "../../../../../../contexts/authContext";
 
 const defaultVenueData = {
   name: "",
@@ -24,6 +25,7 @@ export const useVenueData = (venueId) => {
   const [venueData, setVenueData] = useState(defaultVenueData);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const { authData } = useAuth();
 
   useEffect(() => {
     setLoading(true);
@@ -41,9 +43,14 @@ export const useVenueData = (venueId) => {
       .finally(() => setLoading(false));
   }, [venueId]);
 
-  const updateData = async (updatedData, accessToken, apiKey) => {
+  const updateData = async (updatedData) => {
     try {
-      await updateVenue(venueId, updatedData, accessToken, apiKey);
+      await updateVenue(
+        venueId,
+        updatedData,
+        authData.accessToken,
+        authData.apiKey
+      );
       setError(null);
       return true;
     } catch (error) {

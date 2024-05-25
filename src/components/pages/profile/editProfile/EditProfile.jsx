@@ -37,30 +37,35 @@ const EditProfile = () => {
         <TextInput
           label="Name"
           id="name"
+          name="name"
           value={profile.name}
           onChange={handleChange}
         />
         <TextInput
           label="Email"
           id="email"
+          name="email"
           value={profile.email}
           onChange={handleChange}
         />
         <TextAreaInput
           label="Bio"
           id="bio"
+          name="bio"
           value={profile.bio}
           onChange={handleChange}
         />
         <TextInput
           label="Avatar URL"
           id="avatarUrl"
+          name="avatar.url"
           value={profile.avatar.url}
           onChange={handleChange}
         />
         <TextInput
           label="Banner URL"
           id="bannerUrl"
+          name="banner.url"
           value={profile.banner.url}
           onChange={handleChange}
         />

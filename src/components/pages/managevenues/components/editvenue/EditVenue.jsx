@@ -4,16 +4,16 @@ import TextInput from "../../../../utils/textInput/textInput";
 import TextAreaInput from "../../../../utils/textAreaInput/TextAreaInput";
 import { useVenueData } from "./hooks/useVenueData";
 import useForm from "./hooks/useForm";
-import useAuthNavigation from "./hooks/useAuthNavigation";
+import { useAuth } from "../../../../../contexts/authContext";
 import "./editvenue.scss";
 
 const EditVenue = () => {
   const { venueId } = useParams();
   const { venueData, loading, error, updateData } = useVenueData(venueId);
   const [formData, handleInputChange] = useForm(venueData || {});
-  const { getTokens, redirectTo } = useAuthNavigation("/profile/manage-venues");
+  const { authData } = useAuth();
   const navigate = useNavigate();
-  const currentUsername = localStorage.getItem("username");
+  const currentUsername = authData.username;
 
   const handleBackToProfile = () => {
     navigate(`/profile/${currentUsername}`);
@@ -24,13 +24,16 @@ const EditVenue = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const { accessToken, apiKey } = getTokens();
-    if (!accessToken) {
+    if (!authData.accessToken) {
       console.error("No access token available");
       return;
     }
-    const success = await updateData(formData, accessToken, apiKey);
-    if (success) redirectTo();
+    const success = await updateData(
+      formData,
+      authData.accessToken,
+      authData.apiKey
+    );
+    if (success) navigate("/profile/manage-venues");
   };
 
   return (

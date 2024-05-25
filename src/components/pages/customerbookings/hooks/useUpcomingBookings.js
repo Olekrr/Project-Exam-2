@@ -1,21 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { deleteBooking as deleteBookingAPI } from "../../../../api/bookings";
 import { getProfileBookings } from "../../../../api/profiles";
+import { useAuth } from "../../../../contexts/authContext";
 
 export const useUpcomingBookings = () => {
   const [bookings, setBookings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
+  const { authData } = useAuth();
 
-  useEffect(() => {
-    fetchUserBookings();
-  }, []);
-
-  const fetchUserBookings = async () => {
+  const fetchUserBookings = useCallback(async () => {
     try {
-      const accessToken = localStorage.getItem("accessToken");
-      const apiKey = localStorage.getItem("apiKey");
-      const username = localStorage.getItem("username");
+      const { accessToken, apiKey, username } = authData;
       const data = await getProfileBookings(username, accessToken, apiKey);
       if (data && data.data) {
         setBookings(data.data);
@@ -27,12 +23,15 @@ export const useUpcomingBookings = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [authData]);
+
+  useEffect(() => {
+    fetchUserBookings();
+  }, [fetchUserBookings]);
 
   const removeBookingById = async (id) => {
     try {
-      const accessToken = localStorage.getItem("accessToken");
-      const apiKey = localStorage.getItem("apiKey");
+      const { accessToken, apiKey } = authData;
       await deleteBookingAPI(id, accessToken, apiKey);
       setBookings((currentBookings) =>
         currentBookings.filter((booking) => booking.id !== id)

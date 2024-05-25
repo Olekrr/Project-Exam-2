@@ -1,37 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Navbar, Nav, Container } from "react-bootstrap";
-import { logout } from "../../auth/logout/logout";
 import { getProfileByName } from "../../../api/profiles";
+import { useAuth } from "../../../contexts/authContext";
 import "./header.scss";
 
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const username = localStorage.getItem("username");
+  const { authData, handleLogout } = useAuth();
+  const { username, accessToken, apiKey } = authData;
   const [isEventManager, setIsEventManager] = useState(false);
 
   useEffect(() => {
     const fetchProfileData = async () => {
-      if (username) {
-        const token = localStorage.getItem("accessToken");
-        const apiKey = localStorage.getItem("apiKey");
-
-        if (token && apiKey) {
-          try {
-            const data = await getProfileByName(username, token, apiKey);
-            if (data && data.data) {
-              setIsEventManager(data.data.venueManager);
-            }
-          } catch (err) {
-            console.error("Error fetching profile:", err);
+      if (username && accessToken && apiKey) {
+        try {
+          const data = await getProfileByName(username, accessToken, apiKey);
+          if (data && data.data) {
+            setIsEventManager(data.data.venueManager);
           }
+        } catch (err) {
+          console.error("Error fetching profile:", err);
         }
       }
     };
 
     fetchProfileData();
-  }, [username]);
+  }, [username, accessToken, apiKey]);
 
   const handleProfileClick = () => {
     if (username) {
@@ -39,11 +35,6 @@ const Header = () => {
     } else {
       navigate("/login");
     }
-  };
-
-  const handleLogout = () => {
-    logout();
-    navigate("/");
   };
 
   return (

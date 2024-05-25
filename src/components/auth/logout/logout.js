@@ -1,5 +1,7 @@
-export const logout = () => {
-  localStorage.removeItem("accessToken");
-  localStorage.removeItem("username");
-  localStorage.removeItem("apiKey");
+import { useAuth } from "../contexts/AuthContext";
+
+export const useLogout = () => {
+  const { handleLogout } = useAuth();
+
+  return { logout: handleLogout };
 };
