@@ -1,9 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../contexts/authContext";
 
 const Welcome = () => {
   const navigate = useNavigate();
-  const username = localStorage.getItem("username");
+  const { authData } = useAuth();
+  const { username } = authData;
 
   return (
     <div className="container welcome-container">

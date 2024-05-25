@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getProfileByName, updateProfile } from "../../../../../api/profiles";
+import { useAuth } from "../../../../../contexts/authContext";
 
 export const useEditProfile = (username) => {
   const [profile, setProfile] = useState({
@@ -12,14 +13,14 @@ export const useEditProfile = (username) => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const { authData } = useAuth();
 
   useEffect(() => {
     const fetchProfileData = async () => {
       setIsLoading(true);
       try {
-        const token = localStorage.getItem("accessToken");
-        const apiKey = localStorage.getItem("apiKey");
-        const data = await getProfileByName(username, token, apiKey);
+        const { accessToken, apiKey } = authData;
+        const data = await getProfileByName(username, accessToken, apiKey);
         if (data && data.data) {
           setProfile({ ...data.data });
         } else {
@@ -34,14 +35,13 @@ export const useEditProfile = (username) => {
     };
 
     fetchProfileData();
-  }, [username]);
+  }, [username, authData]);
 
   const updateProfileData = async (profileData) => {
     setIsLoading(true);
     try {
-      const token = localStorage.getItem("accessToken");
-      const apiKey = localStorage.getItem("apiKey");
-      await updateProfile(username, profileData, token, apiKey);
+      const { accessToken, apiKey } = authData;
+      await updateProfile(username, profileData, accessToken, apiKey);
       return true;
     } catch (error) {
       setError("Failed to update profile");

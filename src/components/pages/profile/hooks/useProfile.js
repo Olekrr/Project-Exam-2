@@ -1,18 +1,19 @@
 import { useState, useEffect } from "react";
 import { getProfileByName } from "../../../../api/profiles";
+import { useAuth } from "../../../../contexts/authContext";
 
 export const useProfile = (username) => {
   const [profile, setProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
+  const { authData } = useAuth();
 
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const token = localStorage.getItem("accessToken");
-        const apiKey = localStorage.getItem("apiKey");
+        const { accessToken, apiKey } = authData;
 
-        if (!token || !apiKey) {
+        if (!accessToken || !apiKey) {
           setError(
             "Authentication credentials are not available. Please login again."
           );
@@ -20,7 +21,7 @@ export const useProfile = (username) => {
           return;
         }
 
-        const data = await getProfileByName(username, token, apiKey);
+        const data = await getProfileByName(username, accessToken, apiKey);
         if (data && data.data) {
           setProfile(data.data);
         } else {
@@ -35,7 +36,7 @@ export const useProfile = (username) => {
     };
 
     fetchProfileData();
-  }, [username]);
+  }, [username, authData]);
 
   return { profile, isLoading, error };
 };

@@ -6,7 +6,7 @@ import ConfirmDeleteModal from "./components/deletemodal/ConfirmDeleteModal";
 import "./venuelist.scss";
 
 const VenueList = ({ username }) => {
-  const { venues, isLoading, error, deleteVenue } = useVenues(username);
+  const { venues, error, deleteVenue } = useVenues(username);
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [venueToDelete, setVenueToDelete] = useState(null);
@@ -40,11 +40,7 @@ const VenueList = ({ username }) => {
     return <div>Error: {error}</div>;
   }
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (venues.length === 0) {
+  if (!venues.length) {
     return (
       <div className="venue-list">
         <p>No venues available. Start by adding your first venue!</p>

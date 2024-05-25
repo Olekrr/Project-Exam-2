@@ -1,11 +1,14 @@
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../contexts/authContext";
 
 const useAuthNavigation = (targetRoute) => {
   const navigate = useNavigate();
+  const { authData } = useAuth();
+  const { accessToken, apiKey } = authData;
 
   const getTokens = () => ({
-    accessToken: localStorage.getItem("accessToken"),
-    apiKey: localStorage.getItem("apiKey")
+    accessToken,
+    apiKey
   });
 
   const redirectTo = () => {

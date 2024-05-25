@@ -1,4 +1,4 @@
-const API_URL = "https://v2.api.noroff.dev";
+const API_URL = process.env.REACT_APP_API_URL;
 
 export const apiRequest = async (
   endpoint,

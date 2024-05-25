@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { createVenue } from "../../../../../../api/venues";
+import { useAuth } from "../../../../../../contexts/authContext";
 
 const useSubmitVenue = () => {
   const navigate = useNavigate();
+  const { authData } = useAuth();
 
   const handleSubmit = async (formData, username) => {
-    const accessToken = localStorage.getItem("accessToken");
-    const apiKey = localStorage.getItem("apiKey");
+    const { accessToken, apiKey } = authData;
 
     const preparedData = {
       ...formData,

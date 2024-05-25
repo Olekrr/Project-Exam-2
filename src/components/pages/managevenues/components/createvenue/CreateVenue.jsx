@@ -5,6 +5,7 @@ import useSubmitVenue from "./hooks/useSubmitVenue";
 import TextInput from "../../../../utils/textInput/textInput";
 import TextAreaInput from "../../../../utils/textAreaInput/TextAreaInput";
 import CheckboxInput from "../../../../utils/checkboxInput/CheckboxInput";
+import { useAuth } from "../../../../../contexts/authContext";
 import "./createvenue.scss";
 
 const initialState = {
@@ -32,11 +33,12 @@ const initialState = {
 const CreateVenue = () => {
   const [venueData, handleChange] = useFormState(initialState);
   const handleSubmit = useSubmitVenue();
-  const currentUsername = localStorage.getItem("username");
+  const { authData } = useAuth();
+  const { username } = authData;
   const navigate = useNavigate();
 
   const handleBackToProfile = () => {
-    navigate(`/profile/${currentUsername}`);
+    navigate(`/profile/${username}`);
   };
 
   return (
@@ -45,7 +47,7 @@ const CreateVenue = () => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          handleSubmit(venueData, currentUsername);
+          handleSubmit(venueData, username);
         }}
         className="mt-4"
       >
