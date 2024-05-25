@@ -15,10 +15,12 @@ const VenueBookings = () => {
       const apiKey = localStorage.getItem("apiKey");
       try {
         const result = await getAllBookings(accessToken, apiKey);
+        console.log("API Result:", result);
         if (result && result.data) {
           const filteredBookings = result.data.filter(
             (booking) => booking.venue && booking.venue.id === venueId
           );
+          console.log("Filtered Bookings:", filteredBookings);
           setBookings(filteredBookings);
         } else {
           setError("No bookings found.");
@@ -33,6 +35,11 @@ const VenueBookings = () => {
     fetchAllBookings();
   }, [venueId]);
 
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
@@ -41,9 +48,17 @@ const VenueBookings = () => {
       <h1>Active Venue Bookings</h1>
       <ul className="list-group mt-4">
         {bookings.map((booking) => (
-          <li key={booking.id} className="list-group-item">
-            Booking from {booking.dateFrom} to {booking.dateTo}:{" "}
-            {booking.guests} guests
+          <li key={booking.id} className="list-group-item booking-item">
+            <div className="booking-info">
+              <div className="booking-dates">
+                <strong>Booking from:</strong> {formatDate(booking.dateFrom)}{" "}
+                <br />
+                <strong>to:</strong> {formatDate(booking.dateTo)}
+              </div>
+              <div className="booking-details">
+                <strong>Guests:</strong> {booking.guests}
+              </div>
+            </div>
           </li>
         ))}
       </ul>

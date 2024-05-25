@@ -47,21 +47,24 @@ const Profile = () => {
             bio={profile.bio}
             venueManager={profile.venueManager}
           />
+          <div className="profile-buttons mt-3">
+            <button className="btn btn-primary" onClick={handleEdit}>
+              Edit Profile
+            </button>
+            {profile.venueManager ? (
+              <button
+                className="btn btn-secondary"
+                onClick={handleManageVenues}
+              >
+                Manage Venues
+              </button>
+            ) : (
+              <button className="btn btn-info" onClick={handleViewBookings}>
+                View Your Bookings
+              </button>
+            )}
+          </div>
         </div>
-      </div>
-      <div className="profile-buttons mt-3 text-center">
-        <button className="btn btn-primary" onClick={handleEdit}>
-          Edit Profile
-        </button>
-        {profile.venueManager ? (
-          <button className="btn btn-secondary" onClick={handleManageVenues}>
-            Manage Venues
-          </button>
-        ) : (
-          <button className="btn btn-info" onClick={handleViewBookings}>
-            View Your Bookings
-          </button>
-        )}
       </div>
     </div>
   );

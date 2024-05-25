@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Venue from "./components/Venue";
+import Venue from "./components/venue/Venue";
 import useVenues from "./hooks/useVenues";
+import ConfirmDeleteModal from "./components/deletemodal/ConfirmDeleteModal";
 import "./venuelist.scss";
 
 const VenueList = ({ username }) => {
   const { venues, isLoading, error, deleteVenue } = useVenues(username);
   const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
+  const [venueToDelete, setVenueToDelete] = useState(null);
 
   const handleEdit = (id) => {
     navigate(`/profile/${username}/manage-venues/edit/${id}`);
@@ -14,6 +17,23 @@ const VenueList = ({ username }) => {
 
   const handleCreateVenue = () => {
     navigate(`/profile/${username}/manage-venues/create`);
+  };
+
+  const handleDeleteClick = (venue) => {
+    setVenueToDelete(venue);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setVenueToDelete(null);
+  };
+
+  const handleConfirmDelete = () => {
+    if (venueToDelete) {
+      deleteVenue(venueToDelete.id);
+    }
+    handleCloseModal();
   };
 
   if (error) {
@@ -42,7 +62,7 @@ const VenueList = ({ username }) => {
           key={venue.id}
           venue={venue}
           onEdit={handleEdit}
-          onDelete={deleteVenue}
+          onDelete={() => handleDeleteClick(venue)}
           onViewBookings={() =>
             navigate(`/profile/${username}/manage-venues/${venue.id}/bookings`)
           }
@@ -51,6 +71,11 @@ const VenueList = ({ username }) => {
       <button onClick={handleCreateVenue} className="btn btn-secondary mt-3">
         Add Another Venue
       </button>
+      <ConfirmDeleteModal
+        show={showModal}
+        handleClose={handleCloseModal}
+        handleConfirm={handleConfirmDelete}
+      />
     </div>
   );
 };
