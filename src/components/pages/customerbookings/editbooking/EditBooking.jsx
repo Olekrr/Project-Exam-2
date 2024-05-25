@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import TextInput from "../../../utils/textInput/textInput";
 import { useBooking } from "./hooks/useBooking";
+import { useAuth } from "../../../../contexts/authContext";
 import "./editbooking.scss";
 
 const EditBooking = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { authData } = useAuth();
   const { booking, error, updateBookingDetails } = useBooking(id);
   const [dateFrom, setDateFrom] = useState(booking?.dateFrom || "");
   const [dateTo, setDateTo] = useState(booking?.dateTo || "");
@@ -63,7 +65,7 @@ const EditBooking = () => {
             </button>
             <button
               type="button"
-              className="btn "
+              className="btn"
               onClick={() => navigate(`/profile`)}
             >
               Back to Profile

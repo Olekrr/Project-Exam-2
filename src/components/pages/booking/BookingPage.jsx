@@ -4,6 +4,7 @@ import { createBooking } from "../../../api/bookings";
 import { useBookings } from "./hooks/useBookings";
 import BookingCalendar from "./components/calendar/Calendar";
 import BookingForm from "./components/bookingform/BookingForm";
+import { useAuth } from "../../../contexts/authContext";
 
 const BookingPage = () => {
   const { venueId } = useParams();
@@ -12,6 +13,7 @@ const BookingPage = () => {
   const [endDate, setEndDate] = useState(null);
   const [guests, setGuests] = useState(1);
   const [maxGuests] = useState(10);
+  const { authData } = useAuth();
 
   const handleDateSelect = (selectInfo) => {
     setStartDate(selectInfo.startStr);
@@ -19,8 +21,7 @@ const BookingPage = () => {
   };
 
   const handleCreateBooking = async () => {
-    const accessToken = localStorage.getItem("accessToken");
-    const apiKey = localStorage.getItem("apiKey");
+    const { accessToken, apiKey } = authData;
     const bookingData = {
       dateFrom: startDate,
       dateTo: endDate,

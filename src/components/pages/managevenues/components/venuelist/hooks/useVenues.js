@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
+import { useAuth } from "../../../../../../contexts/authContext";
 import { getProfileVenues } from "../../../../../../api/profiles";
 import { deleteVenue } from "../../../../../../api/venues";
 
 const useVenues = (username) => {
+  const { authData } = useAuth();
   const [venues, setVenues] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchVenues() {
       try {
-        const accessToken = localStorage.getItem("accessToken");
-        const apiKey = localStorage.getItem("apiKey");
+        const { accessToken, apiKey } = authData;
         if (!accessToken || !apiKey) {
           setError("Authentication credentials are missing.");
           return;
@@ -32,12 +33,11 @@ const useVenues = (username) => {
     if (username) {
       fetchVenues();
     }
-  }, [username]);
+  }, [username, authData]);
 
   const deleteVenueById = async (id) => {
     try {
-      const accessToken = localStorage.getItem("accessToken");
-      const apiKey = localStorage.getItem("apiKey");
+      const { accessToken, apiKey } = authData;
       await deleteVenue(id, accessToken, apiKey);
       setVenues((prev) => prev.filter((venue) => venue.id !== id));
     } catch (error) {
