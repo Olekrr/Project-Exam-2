@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { deleteBooking as deleteBookingAPI } from "../../../../api/bookings";
 import { getProfileBookings } from "../../../../api/profiles";
 import { useAuth } from "../../../../contexts/authContext";
@@ -9,11 +9,7 @@ export const useUpcomingBookings = () => {
   const [error, setError] = useState("");
   const { authData } = useAuth();
 
-  useEffect(() => {
-    fetchUserBookings();
-  }, []);
-
-  const fetchUserBookings = async () => {
+  const fetchUserBookings = useCallback(async () => {
     try {
       const { accessToken, apiKey, username } = authData;
       const data = await getProfileBookings(username, accessToken, apiKey);
@@ -27,7 +23,11 @@ export const useUpcomingBookings = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [authData]);
+
+  useEffect(() => {
+    fetchUserBookings();
+  }, [fetchUserBookings]);
 
   const removeBookingById = async (id) => {
     try {
