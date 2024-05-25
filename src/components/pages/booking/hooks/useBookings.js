@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { getAllBookings } from "../../../../api/bookings";
 
 export const useBookings = (venueId) => {
@@ -6,7 +6,7 @@ export const useBookings = (venueId) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const fetchBookings = async () => {
+  const fetchBookings = useCallback(async () => {
     const accessToken = localStorage.getItem("accessToken");
     const apiKey = localStorage.getItem("apiKey");
     try {
@@ -21,11 +21,11 @@ export const useBookings = (venueId) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [venueId]);
 
   useEffect(() => {
     fetchBookings();
-  }, [venueId]);
+  }, [fetchBookings]);
 
   return { bookings, loading, error, fetchBookings };
 };

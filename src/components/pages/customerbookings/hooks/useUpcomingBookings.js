@@ -1,8 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  updateBooking,
-  deleteBooking as deleteBookingAPI
-} from "../../../../api/bookings";
+import { deleteBooking as deleteBookingAPI } from "../../../../api/bookings";
 import { getProfileBookings } from "../../../../api/profiles";
 
 export const useUpcomingBookings = () => {
