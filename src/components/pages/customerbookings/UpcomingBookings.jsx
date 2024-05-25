@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useUpcomingBookings } from "./hooks/useUpcomingBookings";
 import BookingList from "./components/bookinglist/BookingList";
+import "./upcomingbookings.scss";
 
 const UpcomingBookings = () => {
   const { bookings, isLoading, error, removeBookingById } =
@@ -16,8 +17,8 @@ const UpcomingBookings = () => {
   if (error) return <div className="alert alert-danger">{error}</div>;
 
   return (
-    <div>
-      <h2>Your Upcoming Bookings</h2>
+    <div className="upcoming-bookings-container">
+      <h2 className="mb-4">Your Upcoming Bookings</h2>
       <BookingList
         bookings={bookings}
         onEdit={handleEditBooking}

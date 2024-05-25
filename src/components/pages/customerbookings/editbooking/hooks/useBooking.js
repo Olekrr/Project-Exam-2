@@ -8,12 +8,10 @@ export const useBooking = (bookingId) => {
   useEffect(() => {
     if (!bookingId) {
       setError("Booking ID is undefined.");
-      console.log("Error: Booking ID is undefined.");
       return;
     }
 
     const fetchBooking = async () => {
-      console.log("Fetching booking with ID:", bookingId);
       const token = localStorage.getItem("accessToken");
       const apiKey = localStorage.getItem("apiKey");
       if (!token) {
@@ -22,7 +20,6 @@ export const useBooking = (bookingId) => {
       }
       try {
         const response = await getBookingById(bookingId, token, apiKey);
-        console.log("Booking fetched:", response.data);
         setBooking({
           ...response.data,
           dateFrom: response.data.dateFrom.split("T")[0],

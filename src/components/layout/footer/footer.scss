@@ -1,0 +1,8 @@
+@import "../../../styles/_variables.scss";
+
+.footer {
+  background-color: map-get($theme-colors, "light");
+  text-align: center;
+  padding: 1rem 0;
+  flex-shrink: 0;
+}

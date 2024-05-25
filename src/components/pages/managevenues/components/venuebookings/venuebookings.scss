@@ -1,4 +1,4 @@
-@import "../../../../../styles/main.scss";
+@import "../../../../../styles/_variables.scss";
 
 .venue-bookings {
   h1 {
@@ -14,8 +14,8 @@
       padding: 1rem;
       margin-bottom: 0.5rem;
       border-radius: 8px;
-      border: 1px solid #ddd;
-      background-color: #f8f9fa;
+      border: 1px solid map-get($theme-colors, "light");
+      background-color: map-get($theme-colors, "light");
 
       .booking-info {
         display: flex;

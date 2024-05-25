@@ -52,10 +52,7 @@ const Profile = () => {
               Edit Profile
             </button>
             {profile.venueManager ? (
-              <button
-                className="btn btn-secondary"
-                onClick={handleManageVenues}
-              >
+              <button className="btn btn-info" onClick={handleManageVenues}>
                 Manage Venues
               </button>
             ) : (

@@ -15,12 +15,10 @@ const VenueBookings = () => {
       const apiKey = localStorage.getItem("apiKey");
       try {
         const result = await getAllBookings(accessToken, apiKey);
-        console.log("API Result:", result);
         if (result && result.data) {
           const filteredBookings = result.data.filter(
             (booking) => booking.venue && booking.venue.id === venueId
           );
-          console.log("Filtered Bookings:", filteredBookings);
           setBookings(filteredBookings);
         } else {
           setError("No bookings found.");

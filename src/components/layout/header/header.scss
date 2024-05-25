@@ -1,4 +1,4 @@
-@import "../../../styles/main.scss";
+@import "../../../styles/_variables.scss";
 
 .navbar {
   background-color: transparent;
@@ -28,7 +28,7 @@
   }
 
   .navbar-collapse {
-    justify-content: flex-end; /* Ensure alignment to the right */
+    justify-content: flex-end;
   }
 
   .nav-item {
@@ -59,12 +59,12 @@
 
     .nav-link-register {
       background-color: map-get($theme-colors, "primary");
-      color: white;
       padding: 0.5rem 1.5rem;
       border-radius: 30px;
 
       &:hover {
         background-color: darken(map-get($theme-colors, "primary"), 10%);
+        color: darken(map-get($theme-colors, "dark"), 10%);
       }
     }
   }

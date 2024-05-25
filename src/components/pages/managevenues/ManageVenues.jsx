@@ -18,7 +18,7 @@ const ManageVenues = () => {
         Here you can add, remove, or edit venues you manage.
       </p>
       <VenueList username={username} />
-      <button onClick={handleBackToProfile} className="btn btn-secondary mt-4">
+      <button onClick={handleBackToProfile} className="btn btn-info mt-4">
         Back to Profile
       </button>
     </div>

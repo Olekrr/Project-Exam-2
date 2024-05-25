@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import useFormState from "./hooks/useFormState";
 import useSubmitVenue from "./hooks/useSubmitVenue";
 import TextInput from "../../../../utils/textInput/textInput";
@@ -32,6 +33,11 @@ const CreateVenue = () => {
   const [venueData, handleChange] = useFormState(initialState);
   const handleSubmit = useSubmitVenue();
   const currentUsername = localStorage.getItem("username");
+  const navigate = useNavigate();
+
+  const handleBackToProfile = () => {
+    navigate(`/profile/${currentUsername}`);
+  };
 
   return (
     <div className="create-venue container mt-5">
@@ -152,9 +158,18 @@ const CreateVenue = () => {
           value={venueData.location.continent}
           onChange={handleChange}
         />
-        <button type="submit" className="btn btn-primary mt-3">
-          Create Venue
-        </button>
+        <div className="button-group mt-3">
+          <button type="submit" className="btn btn-primary">
+            Create Venue
+          </button>
+          <button
+            type="button"
+            className="btn btn-info"
+            onClick={handleBackToProfile}
+          >
+            Back to Profile
+          </button>
+        </div>
       </form>
     </div>
   );
