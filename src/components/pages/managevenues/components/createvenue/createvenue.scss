@@ -1,0 +1,20 @@
+@import "../../../.././../styles/main.scss";
+
+.create-venue {
+  h1 {
+    color: map-get($theme-colors, "dark");
+    font-size: 2rem;
+  }
+
+  form {
+    margin-top: 1rem;
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      margin-top: 1rem;
+    }
+  }
+}

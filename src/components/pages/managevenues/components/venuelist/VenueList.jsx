@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Venue from "./components/Venue";
 import useVenues from "./hooks/useVenues";
+import "./venuelist.scss";
 
 const VenueList = ({ username }) => {
   const { venues, isLoading, error, deleteVenue } = useVenues(username);
@@ -25,7 +26,7 @@ const VenueList = ({ username }) => {
 
   if (venues.length === 0) {
     return (
-      <div>
+      <div className="venue-list">
         <p>No venues available. Start by adding your first venue!</p>
         <button onClick={handleCreateVenue} className="btn btn-primary">
           Add New Venue
@@ -35,7 +36,7 @@ const VenueList = ({ username }) => {
   }
 
   return (
-    <div>
+    <div className="venue-list">
       {venues.map((venue) => (
         <Venue
           key={venue.id}

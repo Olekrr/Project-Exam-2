@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "./venuelocation.scss";
 
 const VenueLocation = ({ address, city, country }) => (
-  <div>
+  <div className="venue-location">
     <h3>Location:</h3>
     <p>
       {address}, {city}, {country}

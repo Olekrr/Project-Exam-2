@@ -1,0 +1,18 @@
+@import "../../../styles/main.scss";
+
+.manage-venues {
+  h1 {
+    color: map-get($theme-colors, "dark");
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: #666;
+    font-size: 1.1rem;
+  }
+
+  .btn {
+    margin-top: 1rem;
+  }
+}

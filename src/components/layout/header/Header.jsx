@@ -1,10 +1,12 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Navbar, Nav } from "react-bootstrap";
 import { logout } from "../../auth/logout/logout";
+import "./header.scss";
 
 const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const username = localStorage.getItem("username");
 
   const handleProfileClick = () => {
@@ -21,29 +23,51 @@ const Header = () => {
   };
 
   return (
-    <Navbar bg="light" expand="lg">
-      <Navbar.Brand href="/">Holidaze</Navbar.Brand>
+    <Navbar expand="lg" className="navbar">
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="me-auto">
-          <Nav.Link as={Link} to="/">
+      <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+        <Nav className="nav-buttons">
+          <Nav.Link
+            as={Link}
+            to="/"
+            className={location.pathname === "/" ? "active" : ""}
+          >
             Home
           </Nav.Link>
-          <Nav.Link as={Link} to="/venues">
+          <Nav.Link
+            as={Link}
+            to="/venues"
+            className={location.pathname === "/venues" ? "active" : ""}
+          >
             Venues
           </Nav.Link>
           {username ? (
             <>
               <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
-              <Nav.Link onClick={handleProfileClick}>Profile</Nav.Link>
+              <Nav.Link
+                onClick={handleProfileClick}
+                className={
+                  location.pathname.startsWith("/profile") ? "active" : ""
+                }
+              >
+                Profile
+              </Nav.Link>
             </>
           ) : (
             <>
-              <Nav.Link as={Link} to="/login">
-                Login
+              <Nav.Link
+                as={Link}
+                to="/login"
+                className={`nav-link-login ${location.pathname === "/login" ? "active" : ""}`}
+              >
+                Sign-in
               </Nav.Link>
-              <Nav.Link as={Link} to="/register">
-                Register
+              <Nav.Link
+                as={Link}
+                to="/register"
+                className={`nav-link-register ${location.pathname === "/register" ? "active" : ""}`}
+              >
+                Sign-up
               </Nav.Link>
             </>
           )}

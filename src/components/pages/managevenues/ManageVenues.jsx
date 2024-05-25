@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import VenueList from "./components/venuelist/VenueList";
+import "./managevenues.scss";
 
 const ManageVenues = () => {
   const { username } = useParams();
@@ -11,11 +12,13 @@ const ManageVenues = () => {
   };
 
   return (
-    <div className="manage-venues">
-      <h1>Manage Venues</h1>
-      <p>Here you can add, remove, or edit venues you manage.</p>
+    <div className="manage-venues container mt-5">
+      <h1 className="mb-4">Manage Venues</h1>
+      <p className="mb-4">
+        Here you can add, remove, or edit venues you manage.
+      </p>
       <VenueList username={username} />
-      <button onClick={handleBackToProfile} className="btn btn-secondary">
+      <button onClick={handleBackToProfile} className="btn btn-secondary mt-4">
         Back to Profile
       </button>
     </div>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getAllBookings } from "../../../../../api/bookings";
+import "./venuebookings.scss";
 
 const VenueBookings = () => {
   const { venueId } = useParams();
@@ -36,11 +37,11 @@ const VenueBookings = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div>
+    <div className="venue-bookings container mt-5">
       <h1>Active Venue Bookings</h1>
-      <ul>
+      <ul className="list-group mt-4">
         {bookings.map((booking) => (
-          <li key={booking.id}>
+          <li key={booking.id} className="list-group-item">
             Booking from {booking.dateFrom} to {booking.dateTo}:{" "}
             {booking.guests} guests
           </li>

@@ -40,33 +40,27 @@ export const useVenueSearch = () => {
   };
 
   const filterLogic = (venue) => {
+    const lowerCaseIncludes = (value, filter) =>
+      value?.toLowerCase().includes(filter.toLowerCase());
+
     return (
-      (!filters.name ||
-        venue.name.toLowerCase().includes(filters.name.toLowerCase())) &&
+      (!filters.name || lowerCaseIncludes(venue.name, filters.name)) &&
       (!filters.price || venue.price <= Number(filters.price)) &&
       (!filters.maxGuests || venue.maxGuests >= Number(filters.maxGuests)) &&
       (!filters.rating || venue.rating >= Number(filters.rating)) &&
       (!filters.address ||
-        venue.location.address
-          .toLowerCase()
-          .includes(filters.address.toLowerCase())) &&
+        lowerCaseIncludes(venue.location?.address, filters.address)) &&
       (!filters.city ||
-        venue.location.city
-          .toLowerCase()
-          .includes(filters.city.toLowerCase())) &&
-      (!filters.zip || venue.location.zip.startsWith(filters.zip)) &&
+        lowerCaseIncludes(venue.location?.city, filters.city)) &&
+      (!filters.zip || venue.location?.zip.startsWith(filters.zip)) &&
       (!filters.country ||
-        venue.location.country
-          .toLowerCase()
-          .includes(filters.country.toLowerCase())) &&
+        lowerCaseIncludes(venue.location?.country, filters.country)) &&
       (!filters.continent ||
-        venue.location.continent
-          .toLowerCase()
-          .includes(filters.continent.toLowerCase())) &&
-      (!filters.wifi || venue.meta.wifi === filters.wifi) &&
-      (!filters.parking || venue.meta.parking === filters.parking) &&
-      (!filters.breakfast || venue.meta.breakfast === filters.breakfast) &&
-      (!filters.pets || venue.meta.pets === filters.pets)
+        lowerCaseIncludes(venue.location?.continent, filters.continent)) &&
+      (!filters.wifi || venue.meta?.wifi === filters.wifi) &&
+      (!filters.pets || venue.meta?.pets === filters.pets) &&
+      (!filters.parking || venue.meta?.parking === filters.parking) &&
+      (!filters.breakfast || venue.meta?.breakfast === filters.breakfast)
     );
   };
 

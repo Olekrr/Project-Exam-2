@@ -1,0 +1,13 @@
+@import "../../../../../styles/main.scss";
+
+.venue-location {
+  h3 {
+    color: map-get($theme-colors, "dark");
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1rem;
+    color: #666;
+  }
+}

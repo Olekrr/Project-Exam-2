@@ -4,6 +4,7 @@ import { useProfile } from "./hooks/useProfile";
 import ProfileAvatar from "./components/avatar/ProfileAvatar";
 import ProfileBanner from "./components/banner/ProfileBanner";
 import ProfileDetails from "./components/details/ProfileDetails";
+import "./profile.scss";
 
 const Profile = () => {
   const { username } = useParams();
@@ -23,7 +24,7 @@ const Profile = () => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className="loading">Loading...</div>;
   }
   if (error) {
     return <div className="alert alert-danger">{error}</div>;
@@ -33,35 +34,34 @@ const Profile = () => {
   }
 
   return (
-    <div className="container mt-5">
-      <div className="row">
-        <div className="col-md-4">
+    <div className="container mt-5 profile-container">
+      <ProfileBanner banner={profile.banner} />
+      <div className="profile-header mt-4">
+        <div className="profile-avatar">
           <ProfileAvatar avatar={profile.avatar} />
         </div>
-        <div className="col-md-8">
+        <div className="profile-details">
           <ProfileDetails
             name={profile.name}
             email={profile.email}
             bio={profile.bio}
             venueManager={profile.venueManager}
           />
-          <ProfileBanner banner={profile.banner} />
-          <button className="btn btn-primary mt-3" onClick={handleEdit}>
-            Edit Profile
-          </button>
-          {profile.venueManager ? (
-            <button
-              className="btn btn-secondary mt-3"
-              onClick={handleManageVenues}
-            >
-              Manage Venues
-            </button>
-          ) : (
-            <button className="btn btn-info mt-3" onClick={handleViewBookings}>
-              View Your Bookings
-            </button>
-          )}
         </div>
+      </div>
+      <div className="profile-buttons mt-3 text-center">
+        <button className="btn btn-primary" onClick={handleEdit}>
+          Edit Profile
+        </button>
+        {profile.venueManager ? (
+          <button className="btn btn-secondary" onClick={handleManageVenues}>
+            Manage Venues
+          </button>
+        ) : (
+          <button className="btn btn-info" onClick={handleViewBookings}>
+            View Your Bookings
+          </button>
+        )}
       </div>
     </div>
   );

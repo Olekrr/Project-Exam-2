@@ -1,3 +1,5 @@
+import React from "react";
+
 const ProfileAvatar = ({ avatar }) => {
   if (!avatar || !avatar.url) return null;
   return (

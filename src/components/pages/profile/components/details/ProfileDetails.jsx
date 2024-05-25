@@ -1,10 +1,12 @@
+import React from "react";
+
 const ProfileDetails = ({ name, email, bio, venueManager }) => {
   return (
     <>
-      <h2>{name}</h2>
-      <p>{email}</p>
+      <h2 className="profile-name">{name}</h2>
+      <p className="profile-email">{email}</p>
       {bio && (
-        <p>
+        <p className="profile-bio">
           <strong>Bio:</strong> {bio}
         </p>
       )}
