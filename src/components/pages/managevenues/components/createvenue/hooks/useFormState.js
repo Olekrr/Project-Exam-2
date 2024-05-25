@@ -5,7 +5,7 @@ const useFormState = (initialState) => {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    const path = name.split(/[.\[\]]/).filter(Boolean);
+    const path = name.split(/[.[\]]/).filter(Boolean);
 
     setFormData((prev) => {
       const newData = { ...prev };
