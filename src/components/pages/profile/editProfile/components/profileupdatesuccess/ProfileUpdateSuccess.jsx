@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import "./profileupdatesuccess.scss";
 
 const ProfileUpdateSuccess = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const ProfileUpdateSuccess = () => {
       >
         Visit Profile
       </button>
-      <button className="btn btn-secondary" onClick={() => navigate("/venues")}>
+      <button className="btn btn-info" onClick={() => navigate("/venues")}>
         Browse Venues
       </button>
     </div>

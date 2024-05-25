@@ -1,12 +1,13 @@
-@import "../../../../../styles/main.scss";
+@import "../../../../../styles/_variables.scss";
 
 .venue-card {
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  background-color: #fff;
-
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  background-color: map-get($theme-colors, "light");
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -23,11 +24,11 @@
 
     .card-title {
       font-size: 1.25rem;
-      color: map-get($theme-colors, "primary");
+      color: map-get($theme-colors, "dark");
     }
 
     .card-text {
-      color: #666;
+      color: map-get($theme-colors, "dark");
       margin-bottom: 0.5rem;
     }
 

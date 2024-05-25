@@ -70,10 +70,7 @@ const Home = () => {
                 >
                   Search
                 </button>
-                <button
-                  className="btn btn-outline-secondary"
-                  onClick={toggleSearchMode}
-                >
+                <button className="btn btn-info" onClick={toggleSearchMode}>
                   Advanced Search
                 </button>
               </div>

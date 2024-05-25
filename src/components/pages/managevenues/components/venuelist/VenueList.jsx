@@ -68,7 +68,7 @@ const VenueList = ({ username }) => {
           }
         />
       ))}
-      <button onClick={handleCreateVenue} className="btn btn-secondary mt-3">
+      <button onClick={handleCreateVenue} className="btn btn-primary mt-3">
         Add Another Venue
       </button>
       <ConfirmDeleteModal

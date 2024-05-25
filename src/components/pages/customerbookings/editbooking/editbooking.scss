@@ -1,0 +1,31 @@
+@import "../../../../styles/_variables.scss";
+
+.edit-booking {
+  h1 {
+    color: map-get($theme-colors, "dark");
+    font-size: 2rem;
+  }
+
+  form {
+    margin-top: 1rem;
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      margin-top: 1rem;
+    }
+  }
+
+  .button-group {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+
+    .btn {
+      padding: 8px 16px;
+      font-size: 1rem;
+    }
+  }
+}

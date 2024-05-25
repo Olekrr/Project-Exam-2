@@ -22,14 +22,10 @@ export const updateProfile = (name, profileData, accessToken, apiKey) =>
     apiKey
   );
 
-export const getProfileBookings = (name, accessToken, apiKey) =>
-  apiRequest(
-    `/holidaze/profiles/${name}/bookings`,
-    "GET",
-    accessToken,
-    null,
-    apiKey
-  );
+export const getProfileBookings = (name, accessToken, apiKey) => {
+  const url = `/holidaze/profiles/${name}/bookings?_venues=true`;
+  return apiRequest(url, "GET", accessToken, null, apiKey);
+};
 
 export const getProfileVenues = (name, accessToken, apiKey) =>
   apiRequest(

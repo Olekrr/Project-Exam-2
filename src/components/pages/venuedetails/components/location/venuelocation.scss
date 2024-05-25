@@ -1,4 +1,4 @@
-@import "../../../../../styles/main.scss";
+@import "../../../../../styles/_variables.scss";
 
 .venue-location {
   h3 {
@@ -8,6 +8,6 @@
 
   p {
     font-size: 1rem;
-    color: #666;
+    color: map-get($theme-colors, "dark");
   }
 }
