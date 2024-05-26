@@ -3,6 +3,12 @@ import { getVenueById } from "../../../../api/venues";
 import { useAuth } from "../../../../contexts/authContext";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * Custom hook to fetch and manage venue details.
+ *
+ * @param {string} id - The ID of the venue to fetch.
+ * @returns {Object} The venue data, loading status, and error state.
+ */
 const useVenue = (id) => {
   const { authData } = useAuth();
   const { accessToken, apiKey } = authData || {};
@@ -17,6 +23,9 @@ const useVenue = (id) => {
       return;
     }
 
+    /**
+     * Fetches venue details from the API.
+     */
     const fetchVenue = async () => {
       try {
         const data = await getVenueById(id, accessToken, apiKey);

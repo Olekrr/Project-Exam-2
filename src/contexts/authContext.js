@@ -6,6 +6,13 @@ import { getProfileByName } from "../api/profiles";
 
 const AuthContext = createContext();
 
+/**
+ * AuthProvider component that provides authentication context to its children.
+ *
+ * @param {Object} props - The component props.
+ * @param {React.ReactNode} props.children - The child components.
+ * @returns {React.ReactNode} The AuthProvider component.
+ */
 export const AuthProvider = ({ children }) => {
   const [authData, setAuthData] = useState({
     accessToken: Cookies.get("accessToken") || null,
@@ -17,6 +24,13 @@ export const AuthProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
+  /**
+   * Handles the login process.
+   *
+   * @param {string} email - The user's email.
+   * @param {string} password - The user's password.
+   * @returns {Promise<void>}
+   */
   const handleLogin = async (email, password) => {
     setAuthData((prev) => ({ ...prev, isLoading: true, error: "" }));
     try {
@@ -52,6 +66,11 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  /**
+   * Handles the logout process.
+   *
+   * @returns {void}
+   */
   const handleLogout = () => {
     Cookies.remove("accessToken");
     Cookies.remove("apiKey");
@@ -73,4 +92,9 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
+/**
+ * Custom hook to use the AuthContext.
+ *
+ * @returns {Object} The authentication context value.
+ */
 export const useAuth = () => useContext(AuthContext);

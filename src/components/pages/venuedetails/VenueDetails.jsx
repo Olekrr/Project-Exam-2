@@ -7,11 +7,20 @@ import VenueAmenities from "./components/amenities/VenueAmenities";
 import VenueLocation from "./components/location/VenueLocation";
 import "./venuedetails.scss";
 
+/**
+ * Component to display detailed information about a specific venue.
+ *
+ * @component
+ * @returns {JSX.Element} The VenueDetails component.
+ */
 const VenueDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { venue, loading, error } = useVenue(id);
 
+  /**
+   * Handles the "Book Now" button click event.
+   */
   const handleBookNow = () => {
     navigate(`/booking/${id}`);
   };

@@ -28,6 +28,11 @@ afterAll(() => {
   console.error.mockRestore();
 });
 
+/**
+ * Mock component to use AuthContext.
+ * @component
+ * @returns {React.Element}
+ */
 const MockComponent = () => {
   const { authData, handleLogin, handleLogout } = useAuth();
   return (
@@ -54,6 +59,10 @@ describe("AuthContext", () => {
     Cookies.remove.mockImplementation(() => {});
   });
 
+  /**
+   * Test for successful login.
+   * @returns {Promise<void>}
+   */
   it("should handle successful login", async () => {
     loginUser.mockResolvedValue({ accessToken: "fakeToken", name: "testuser" });
     createApiKey.mockResolvedValue("fakeApiKey");
@@ -102,6 +111,10 @@ describe("AuthContext", () => {
     });
   });
 
+  /**
+   * Test for logout functionality.
+   * @returns {Promise<void>}
+   */
   it("should handle logout", async () => {
     await act(async () => {
       render(
@@ -122,6 +135,10 @@ describe("AuthContext", () => {
     expect(Cookies.remove).toHaveBeenCalledWith("username");
   });
 
+  /**
+   * Test for login error handling.
+   * @returns {Promise<void>}
+   */
   it("should handle login error", async () => {
     loginUser.mockRejectedValue(new Error("Login failed"));
 

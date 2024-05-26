@@ -1,12 +1,44 @@
+/**
+ * Validates if a value meets the minimum length requirement.
+ *
+ * @param {string} value - The value to validate.
+ * @param {number} minLength - The minimum length required.
+ * @returns {boolean} - Returns true if the value meets or exceeds the minimum length, false otherwise.
+ */
 const validateMinLength = (value, minLength) => {
   return value.length >= minLength;
 };
 
+/**
+ * Validates if a string is a valid URL.
+ *
+ * @param {string} string - The string to validate.
+ * @returns {boolean} - Returns true if the string is a valid URL, false otherwise.
+ */
 const isValidURL = (string) => {
   const res = string.match(/^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i);
   return res !== null;
 };
 
+/**
+ * Validates venue form data.
+ *
+ * @param {Object} formData - The form data to validate.
+ * @param {string} formData.name - The name of the venue.
+ * @param {string} formData.description - The description of the venue.
+ * @param {Object} formData.location - The location details of the venue.
+ * @param {string} formData.location.address - The address of the venue.
+ * @param {string} formData.location.city - The city of the venue.
+ * @param {string} formData.location.zip - The zip code of the venue.
+ * @param {string} formData.location.country - The country of the venue.
+ * @param {string} formData.location.continent - The continent of the venue.
+ * @param {Object[]} formData.media - The media array containing image URLs.
+ * @param {string} formData.media.url - The URL of the image.
+ * @param {number} formData.price - The price per night for the venue.
+ * @param {number} formData.maxGuests - The maximum number of guests allowed.
+ * @param {number} formData.rating - The rating of the venue.
+ * @returns {Object} - An object containing validation error messages for each invalid field.
+ */
 const validateVenueForm = (formData) => {
   const errors = {};
 

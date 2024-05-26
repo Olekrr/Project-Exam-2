@@ -31,6 +31,12 @@ const initialState = {
   }
 };
 
+/**
+ * Component for creating a new venue.
+ *
+ * @component
+ * @returns {JSX.Element} The CreateVenue component.
+ */
 const CreateVenue = () => {
   const [venueData, handleChange] = useFormState(initialState);
   const [formErrors, setFormErrors] = useState({});

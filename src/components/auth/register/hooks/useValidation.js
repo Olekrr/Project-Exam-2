@@ -1,3 +1,8 @@
+/**
+ * Validates the name field.
+ * @param {string} name - The name value to validate.
+ * @returns {Object|null} - An error object or null if the name is valid.
+ */
 export const validateName = (name) => {
   if (name.length < 3) {
     return {
@@ -8,6 +13,11 @@ export const validateName = (name) => {
   return null;
 };
 
+/**
+ * Validates the email field.
+ * @param {string} email - The email value to validate.
+ * @returns {Object|null} - An error object or null if the email is valid.
+ */
 export const validateEmail = (email) => {
   if (!email.endsWith("@stud.noroff.no")) {
     return {
@@ -18,6 +28,11 @@ export const validateEmail = (email) => {
   return null;
 };
 
+/**
+ * Validates the password field.
+ * @param {string} password - The password value to validate.
+ * @returns {Object|null} - An error object or null if the password is valid.
+ */
 export const validatePassword = (password) => {
   if (password.length < 5) {
     return {
@@ -28,6 +43,11 @@ export const validatePassword = (password) => {
   return null;
 };
 
+/**
+ * Validates the entire registration form.
+ * @param {Object} formData - The form data to validate.
+ * @returns {Array<Object>} - An array of error objects.
+ */
 export const validateForm = (formData) => {
   const errors = [];
 

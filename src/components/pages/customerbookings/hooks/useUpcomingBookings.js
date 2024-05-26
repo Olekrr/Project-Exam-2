@@ -3,12 +3,20 @@ import { deleteBooking as deleteBookingAPI } from "../../../../api/bookings";
 import { getProfileBookings } from "../../../../api/profiles";
 import { useAuth } from "../../../../contexts/authContext";
 
+/**
+ * Custom hook to manage upcoming bookings.
+ *
+ * @returns {Object} - The state and handlers for managing upcoming bookings.
+ */
 export const useUpcomingBookings = () => {
   const [bookings, setBookings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const { authData } = useAuth();
 
+  /**
+   * Fetches the user's bookings from the API.
+   */
   const fetchUserBookings = useCallback(async () => {
     try {
       const { accessToken, apiKey, username } = authData;
@@ -29,6 +37,11 @@ export const useUpcomingBookings = () => {
     fetchUserBookings();
   }, [fetchUserBookings]);
 
+  /**
+   * Removes a booking by its ID.
+   *
+   * @param {string} id - The ID of the booking to remove.
+   */
   const removeBookingById = async (id) => {
     try {
       const { accessToken, apiKey } = authData;

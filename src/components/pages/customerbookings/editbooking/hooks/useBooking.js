@@ -3,6 +3,12 @@ import { getBookingById, updateBooking } from "../../../../../api/bookings";
 import { getVenueById } from "../../../../../api/venues";
 import { useAuth } from "../../../../../contexts/authContext";
 
+/**
+ * Custom hook to manage booking data.
+ *
+ * @param {string} bookingId - The ID of the booking to manage.
+ * @returns {Object} - The state and handlers for managing a booking.
+ */
 export const useBooking = (bookingId) => {
   const [booking, setBooking] = useState(null);
   const [venueDetails, setVenueDetails] = useState(null);
@@ -10,6 +16,11 @@ export const useBooking = (bookingId) => {
   const [error, setError] = useState("");
   const { authData } = useAuth();
 
+  /**
+   * Fetches the venue details by ID.
+   *
+   * @param {string} venueId - The ID of the venue.
+   */
   const fetchVenueDetails = useCallback(
     async (venueId) => {
       if (!authData.accessToken || !venueId) {
@@ -72,6 +83,12 @@ export const useBooking = (bookingId) => {
     fetchBooking();
   }, [bookingId, authData.accessToken, authData.apiKey, fetchVenueDetails]);
 
+  /**
+   * Updates the booking details.
+   *
+   * @param {Object} updates - The updated booking data.
+   * @returns {Object} - The result of the update operation.
+   */
   const updateBookingDetails = async (updates) => {
     try {
       await updateBooking(

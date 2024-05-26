@@ -2,6 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./venueamenities.scss";
 
+/**
+ * Component to display the amenities available at a venue.
+ *
+ * @component
+ * @param {Object} props - Component properties.
+ * @param {Object} props.meta - The meta data containing amenities information.
+ * @returns {JSX.Element} The VenueAmenities component.
+ */
 const VenueAmenities = ({ meta }) => (
   <div className="venue-amenities">
     <h3>Amenities:</h3>

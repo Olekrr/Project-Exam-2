@@ -2,6 +2,12 @@ import { useState, useEffect } from "react";
 import { getProfileByName } from "../../../../api/profiles";
 import { useAuth } from "../../../../contexts/authContext";
 
+/**
+ * Custom hook to fetch and manage profile data.
+ *
+ * @param {string} username - The username of the profile to fetch.
+ * @returns {Object} The profile data, loading state, and error message.
+ */
 export const useProfile = (username) => {
   const [profile, setProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(true);

@@ -5,6 +5,13 @@ import { getProfileByName } from "../../../api/profiles";
 import { useAuth } from "../../../contexts/authContext";
 import "./header.scss";
 
+/**
+ * Header component for the Holidaze application.
+ * This component displays the navigation bar with links to various pages.
+ * It also handles the logic for displaying user-specific links based on authentication status.
+ *
+ * @component
+ */
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();

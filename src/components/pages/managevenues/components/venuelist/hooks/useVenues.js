@@ -3,12 +3,21 @@ import { useAuth } from "../../../../../../contexts/authContext";
 import { getProfileVenues } from "../../../../../../api/profiles";
 import { deleteVenue } from "../../../../../../api/venues";
 
+/**
+ * Custom hook to manage the venues associated with a user.
+ *
+ * @param {string} username - The username of the venue manager.
+ * @returns {Object} - The state and handlers for managing venues.
+ */
 const useVenues = (username) => {
   const { authData } = useAuth();
   const [venues, setVenues] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    /**
+     * Fetches the venues associated with the user.
+     */
     async function fetchVenues() {
       try {
         const { accessToken, apiKey } = authData;
@@ -35,6 +44,11 @@ const useVenues = (username) => {
     }
   }, [username, authData]);
 
+  /**
+   * Deletes a venue by its ID.
+   *
+   * @param {string} id - The ID of the venue to delete.
+   */
   const deleteVenueById = async (id) => {
     try {
       const { accessToken, apiKey } = authData;

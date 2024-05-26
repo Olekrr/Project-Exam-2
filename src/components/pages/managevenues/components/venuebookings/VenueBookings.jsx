@@ -4,6 +4,12 @@ import { getAllBookings } from "../../../../../api/bookings";
 import { useAuth } from "../../../../../contexts/authContext";
 import "./venuebookings.scss";
 
+/**
+ * VenueBookings component to display active bookings for a specific venue.
+ *
+ * @component
+ * @returns {JSX.Element} - The rendered component.
+ */
 const VenueBookings = () => {
   const { venueId } = useParams();
   const { authData } = useAuth();
@@ -12,6 +18,9 @@ const VenueBookings = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    /**
+     * Fetches all bookings and filters by the current venue ID.
+     */
     const fetchAllBookings = async () => {
       try {
         const result = await getAllBookings(
@@ -36,6 +45,12 @@ const VenueBookings = () => {
     fetchAllBookings();
   }, [venueId, authData.accessToken, authData.apiKey]);
 
+  /**
+   * Formats a date string to a more readable format.
+   *
+   * @param {string} dateString - The date string to format.
+   * @returns {string} - The formatted date string.
+   */
   const formatDate = (dateString) => {
     const options = { year: "numeric", month: "long", day: "numeric" };
     return new Date(dateString).toLocaleDateString(undefined, options);

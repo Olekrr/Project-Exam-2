@@ -2,6 +2,12 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../contexts/authContext";
 
+/**
+ * Welcome component to greet first time users and prompt them to complete their profile.
+ * This component displays a welcome message and provides buttons to navigate to the profile edit page or the home page.
+ *
+ * @component
+ */
 const Welcome = () => {
   const navigate = useNavigate();
   const { authData } = useAuth();

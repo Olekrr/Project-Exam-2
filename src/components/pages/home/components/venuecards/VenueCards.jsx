@@ -3,6 +3,14 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./venuecards.scss";
 
+/**
+ * VenueCard component to display venue details.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {Object} props.venue - The venue details.
+ * @returns {JSX.Element} - The rendered component.
+ */
 const VenueCard = ({ venue }) => (
   <div className="venue-card">
     <Link to={`/venues/${venue.id}`} className="text-decoration-none text-dark">
