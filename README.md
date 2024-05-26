@@ -1,4 +1,5 @@
 # Holidaze - Venue Booking Platform
+[![Run Tests](https://github.com/Olekrr/Project-Exam-2/actions/workflows/test.yml/badge.svg)](https://github.com/Olekrr/Project-Exam-2/actions/workflows/test.yml)
 
 Holidaze is a venue booking platform created for a school project that allows users to search, view, list, manage, and book various venues for different occasions.
 
