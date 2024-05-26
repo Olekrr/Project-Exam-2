@@ -8,6 +8,8 @@ $theme-colors: (
   "dark": #343a40
 );
 
+@import "~bootstrap/scss/bootstrap";
+
 @font-face {
   font-family: "Bebas Neue";
   src: url("../assets/fonts/Bebas_Neue/BebasNeue-Regular.ttf")

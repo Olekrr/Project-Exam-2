@@ -30,6 +30,10 @@ h6 {
   font-family: "Poppins", sans-serif;
 }
 
+.btn-btn-primary {
+  background-color: map-get($theme-colors, "primary");
+}
+
 .btn.btn-info {
   color: map-get($theme-colors, "dark");
   background-color: map-get($theme-colors, "light");

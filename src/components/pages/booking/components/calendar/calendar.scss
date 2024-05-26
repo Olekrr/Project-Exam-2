@@ -1,0 +1,43 @@
+@import "../../../../../styles/_variables.scss";
+
+.booking-calendar {
+  margin: 20px 0;
+  width: 100%;
+  text-align: center;
+
+  h2 {
+    color: map-get($theme-colors, "dark");
+  }
+
+  p {
+    margin-top: 20px;
+    font-size: 1.1rem;
+  }
+
+  .fc {
+    max-width: 100%;
+    margin: 0 auto;
+
+    .fc-toolbar {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .fc-view-container {
+      width: 100%;
+    }
+
+    .fc-daygrid-event {
+      background-color: map-get($theme-colors, "danger");
+      color: map-get($theme-colors, "light");
+    }
+
+    .fc-day-today {
+      background-color: lighten(map-get($theme-colors, "primary"), 40%);
+    }
+
+    .fc-day-past {
+      background-color: lighten(map-get($theme-colors, "light"), 30%);
+    }
+  }
+}
