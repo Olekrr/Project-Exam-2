@@ -16,7 +16,7 @@ const Venue = ({ venue, onEdit, onDelete, onViewBookings }) => {
   return (
     <div className="venue-card card mb-4">
       <div className="card-body">
-        <h3 className="card-title">{venue.name}</h3>
+        <h2 className="card-title">{venue.name}</h2>
         <img
           src={venue.media[0]?.url || "default-image.jpg"}
           alt={venue.media[0]?.alt || "Venue image"}

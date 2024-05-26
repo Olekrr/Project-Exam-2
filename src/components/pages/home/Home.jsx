@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import TextInput from "../../utils/textinput/TextInput";
 import CheckboxInput from "../../utils/checkboxinput/CheckboxInput";
 import { useVenueSearch } from "./hooks/useVenueSearch";
-import VenueCard from "./components/venuecards/VenueCards";
+import VenueCard from "../../utils/venuecards/VenueCards";
 import { searchVenues } from "../../../api/venues";
 import "./home.scss";
 
@@ -237,17 +237,21 @@ const Home = () => {
             </div>
           )}
         </div>
-        <div className="search-results" ref={searchResultsRef}>
+        <div className="row" ref={searchResultsRef}>
           {isAdvancedSearch && searchInitiated && (
             <>
               {filteredVenues.map((venue) => (
-                <VenueCard key={venue.id} venue={venue} />
+                <div key={venue.id} className="col-md-6 col-lg-4 mb-4">
+                  <VenueCard venue={venue} />
+                </div>
               ))}
             </>
           )}
           {!isAdvancedSearch &&
             simpleResults.map((venue) => (
-              <VenueCard key={venue.id} venue={venue} />
+              <div key={venue.id} className="col-md-6 col-lg-4 mb-4">
+                <VenueCard venue={venue} />
+              </div>
             ))}
         </div>
       </div>

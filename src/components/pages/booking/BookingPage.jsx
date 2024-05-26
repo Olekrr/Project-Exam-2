@@ -70,9 +70,9 @@ const BookingPage = () => {
     <div className="booking-page container mt-5">
       <div className="row">
         <div className="col-md-8">
-          <h2>
+          <h1>
             Book Your Stay at {venueDetails ? venueDetails.name : "Loading..."}
-          </h2>
+          </h1>
           <p className="hide-on-small">
             Hold click and drag to choose your time period.
           </p>

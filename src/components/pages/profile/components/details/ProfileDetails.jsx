@@ -14,7 +14,7 @@ import React from "react";
 const ProfileDetails = ({ name, email, bio, venueManager }) => {
   return (
     <>
-      <h2 className="profile-name">{name}</h2>
+      <h1 className="profile-name">{name}</h1>
       <p className="profile-email">{email}</p>
       {bio && (
         <p className="profile-bio">

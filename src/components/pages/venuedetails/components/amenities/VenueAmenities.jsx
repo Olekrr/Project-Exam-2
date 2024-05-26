@@ -12,7 +12,7 @@ import "./venueamenities.scss";
  */
 const VenueAmenities = ({ meta }) => (
   <div className="venue-amenities">
-    <h3>Amenities:</h3>
+    <h2>Amenities:</h2>
     <ul>
       {meta &&
         Object.keys(meta).map((key) => (

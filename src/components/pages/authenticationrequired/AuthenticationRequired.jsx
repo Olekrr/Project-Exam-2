@@ -26,7 +26,7 @@ const AuthenticationRequired = () => {
 
   return (
     <div className="container auth-required-container">
-      <h2>Authentication Required</h2>
+      <h1>Authentication Required</h1>
       <p>You need to be logged in to view this venue.</p>
       <div className="button-group">
         <button className="btn btn-primary" onClick={handleLogin}>

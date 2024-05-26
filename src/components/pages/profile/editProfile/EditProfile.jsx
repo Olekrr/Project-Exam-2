@@ -44,7 +44,7 @@ const EditProfile = () => {
 
   return (
     <div className="container">
-      <h2>Edit Profile</h2>
+      <h1>Edit Profile</h1>
       <form onSubmit={handleSubmit}>
         <TextAreaInput
           label="Bio"

@@ -14,7 +14,7 @@ import "./venuelocation.scss";
  */
 const VenueLocation = ({ address, city, country }) => (
   <div className="venue-location">
-    <h3>Location:</h3>
+    <h2>Location:</h2>
     <p>
       {address}, {city}, {country}
     </p>
