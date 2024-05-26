@@ -80,17 +80,22 @@ const VenueList = ({ username }) => {
 
   return (
     <div className="venue-list">
-      {venues.map((venue) => (
-        <Venue
-          key={venue.id}
-          venue={venue}
-          onEdit={handleEdit}
-          onDelete={() => handleDeleteClick(venue)}
-          onViewBookings={() =>
-            navigate(`/profile/${username}/manage-venues/${venue.id}/bookings`)
-          }
-        />
-      ))}
+      <div className="row">
+        {venues.map((venue) => (
+          <div key={venue.id} className="col-md-6 col-lg-4 mb-4">
+            <Venue
+              venue={venue}
+              onEdit={handleEdit}
+              onDelete={() => handleDeleteClick(venue)}
+              onViewBookings={() =>
+                navigate(
+                  `/profile/${username}/manage-venues/${venue.id}/bookings`
+                )
+              }
+            />
+          </div>
+        ))}
+      </div>
       <button onClick={handleCreateVenue} className="btn btn-primary mt-3">
         Add Another Venue
       </button>

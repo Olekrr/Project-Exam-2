@@ -3,7 +3,8 @@
 .manage-venues {
   h1 {
     color: map-get($theme-colors, "dark");
-    font-size: 2rem;
+    font-size: 1.5rem;
+    font-weight: normal;
     margin-bottom: 1rem;
   }
 
