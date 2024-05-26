@@ -1,0 +1,94 @@
+@import "../../../styles/_variables.scss";
+
+.booking-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+
+  h2 {
+    color: map-get($theme-colors, "dark");
+    text-align: center;
+  }
+
+  p {
+    margin-top: 20px;
+    font-size: 1.1rem;
+    text-align: center;
+
+    &.hide-on-small {
+      @media (max-width: 900px) {
+        display: none;
+      }
+    }
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    @media (max-width: 900px) {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .col-md-8 {
+      flex: 0 0 55%;
+      max-width: 55%;
+
+      @media (max-width: 900px) {
+        max-width: 100%;
+      }
+
+      .calendar-container {
+        @media (max-width: 900px) {
+          display: none;
+        }
+      }
+    }
+
+    .col-md-4 {
+      flex: 0 0 40%;
+      max-width: 40%;
+      margin-top: 110px;
+
+      @media (max-width: 900px) {
+        flex: 0 0 80%;
+        max-width: 80%;
+        margin-top: 20px;
+      }
+    }
+  }
+
+  .booking-calendar {
+    margin: 20px 0;
+    width: 100%;
+
+    .fc {
+      max-width: 100%;
+      margin: 0 auto;
+
+      .fc-toolbar {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .fc-view-container {
+        width: 100%;
+      }
+
+      .fc-daygrid-event {
+        background-color: map-get($theme-colors, "danger");
+        color: map-get($theme-colors, "light");
+      }
+
+      .fc-day-today {
+        background-color: lighten(map-get($theme-colors, "primary"), 40%);
+      }
+
+      .fc-day-past {
+        background-color: lighten(map-get($theme-colors, "light"), 30%);
+      }
+    }
+  }
+}

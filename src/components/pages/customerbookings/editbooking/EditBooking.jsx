@@ -2,15 +2,19 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import TextInput from "../../../utils/textInput/textInput";
 import { useBooking } from "./hooks/useBooking";
+import { useAuth } from "../../../../contexts/authContext";
+import BookingUpdateSuccess from "./bookingupdatesuccess/BookingUpdateSuccess";
 import "./editbooking.scss";
 
 const EditBooking = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { authData } = useAuth();
   const { booking, error, updateBookingDetails } = useBooking(id);
   const [dateFrom, setDateFrom] = useState(booking?.dateFrom || "");
   const [dateTo, setDateTo] = useState(booking?.dateTo || "");
   const [guests, setGuests] = useState(booking?.guests || 1);
+  const [updateSuccess, setUpdateSuccess] = useState(false);
 
   useEffect(() => {
     if (booking) {
@@ -24,9 +28,23 @@ const EditBooking = () => {
     const updates = { dateFrom, dateTo, guests: Number(guests) };
     const result = await updateBookingDetails(updates);
     if (result.success) {
-      navigate(`/profile`);
+      setUpdateSuccess(true);
     }
   };
+
+  if (updateSuccess) {
+    return (
+      <BookingUpdateSuccess
+        booking={{
+          ...booking,
+          dateFrom,
+          dateTo,
+          guests,
+          username: authData.username
+        }}
+      />
+    );
+  }
 
   return (
     <div className="edit-booking container mt-5">
@@ -64,7 +82,7 @@ const EditBooking = () => {
             <button
               type="button"
               className="btn"
-              onClick={() => navigate(`/profile`)}
+              onClick={() => navigate(`/profile/${authData.username}`)}
             >
               Back to Profile
             </button>

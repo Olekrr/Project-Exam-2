@@ -5,19 +5,22 @@ import { useBookings } from "./hooks/useBookings";
 import BookingCalendar from "./components/calendar/Calendar";
 import BookingForm from "./components/bookingform/BookingForm";
 import { useAuth } from "../../../contexts/authContext";
+import "./bookingpage.scss";
 
 const BookingPage = () => {
   const { venueId } = useParams();
-  const { bookings, loading, error, fetchBookings } = useBookings(venueId);
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  const { bookings, loading, error, fetchBookings, maxGuests, venueDetails } =
+    useBookings(venueId);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [guests, setGuests] = useState(1);
-  const [maxGuests] = useState(10);
   const { authData } = useAuth();
 
-  const handleDateSelect = (selectInfo) => {
-    setStartDate(selectInfo.startStr);
-    setEndDate(selectInfo.endStr);
+  const handleDateSelect = (info) => {
+    setStartDate(info.startStr);
+    const adjustedEndDate = new Date(info.endStr);
+    adjustedEndDate.setDate(adjustedEndDate.getDate() - 1);
+    setEndDate(adjustedEndDate.toISOString().split("T")[0]);
   };
 
   const handleCreateBooking = async () => {
@@ -51,18 +54,37 @@ const BookingPage = () => {
   }));
 
   return (
-    <div>
-      <h2>Book Your Stay at Venue {venueId}</h2>
-      <p>
-        Please click or drag across the dates you want to book on the calendar.
-      </p>
-      <BookingCalendar events={events} onSelectDate={handleDateSelect} />
-      <BookingForm
-        guests={guests}
-        maxGuests={maxGuests}
-        onChangeGuests={(e) => setGuests(e.target.value)}
-        onCreateBooking={handleCreateBooking}
-      />
+    <div className="booking-page container mt-5">
+      <div className="row">
+        <div className="col-md-8">
+          <h2>
+            Book Your Stay at {venueDetails ? venueDetails.name : "Loading..."}
+          </h2>
+          <p className="hide-on-small">
+            Hold click and drag to choose your time period.
+          </p>
+          <div className="calendar-container">
+            <BookingCalendar
+              events={events}
+              onDateSelect={handleDateSelect}
+              venueName={venueDetails ? venueDetails.name : "Loading..."}
+            />
+          </div>
+        </div>
+        <div className="col-md-4">
+          <BookingForm
+            startDate={startDate}
+            setStartDate={setStartDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
+            guests={guests}
+            setGuests={setGuests}
+            onCreateBooking={handleCreateBooking}
+            maxGuests={maxGuests}
+            bookings={bookings}
+          />
+        </div>
+      </div>
     </div>
   );
 };
