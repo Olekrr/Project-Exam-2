@@ -3,12 +3,22 @@ import TextInput from "../../utils/textinput/TextInput";
 import { useAuth } from "../../../contexts/authContext";
 import "./login.scss";
 
+/**
+ * Login component for user authentication.
+ * This component renders a login form where users can input their email and password to log in.
+ * @component
+ * @returns {JSX.Element} The rendered Login component.
+ */
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { handleLogin, authData } = useAuth();
   const { isLoading, error } = authData;
 
+  /**
+   * Handles the form submission for login.
+   * @param {React.FormEvent<HTMLFormElement>} e - The form submission event.
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     handleLogin(email, password);

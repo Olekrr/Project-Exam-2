@@ -1,6 +1,17 @@
 import React from "react";
 import "./venue.scss";
 
+/**
+ * Venue component to display venue details and action buttons.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {Object} props.venue - The venue details.
+ * @param {function} props.onEdit - Function to handle editing the venue.
+ * @param {function} props.onDelete - Function to handle deleting the venue.
+ * @param {function} props.onViewBookings - Function to handle viewing bookings for the venue.
+ * @returns {JSX.Element} - The rendered component.
+ */
 const Venue = ({ venue, onEdit, onDelete, onViewBookings }) => {
   return (
     <div className="venue-card card mb-4">

@@ -4,6 +4,22 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./bookingform.scss";
 
+/**
+ * BookingForm component for creating a new booking.
+ * Provides inputs for start date, end date, and number of guests.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {string} props.startDate - The selected start date.
+ * @param {function} props.setStartDate - Function to set the start date.
+ * @param {string} props.endDate - The selected end date.
+ * @param {function} props.setEndDate - Function to set the end date.
+ * @param {number} props.guests - The number of guests.
+ * @param {function} props.setGuests - Function to set the number of guests.
+ * @param {function} props.onCreateBooking - Function to create a new booking.
+ * @param {number} props.maxGuests - The maximum number of guests allowed.
+ * @param {Array} props.bookings - The list of current bookings.
+ */
 const BookingForm = ({
   startDate,
   setStartDate,
@@ -17,6 +33,10 @@ const BookingForm = ({
 }) => {
   const [guestError, setGuestError] = useState("");
 
+  /**
+   * Handles changing the number of guests.
+   * @param {Object} e - The event object.
+   */
   const handleGuestChange = (e) => {
     const value = Number(e.target.value);
     if (value > maxGuests) {

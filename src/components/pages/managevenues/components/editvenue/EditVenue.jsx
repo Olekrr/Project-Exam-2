@@ -9,6 +9,12 @@ import CheckboxInput from "../../../../utils/checkboxinput/CheckboxInput";
 import validateVenueForm from "../utils/validateVenueForm";
 import "./editvenue.scss";
 
+/**
+ * Component for editing a venue.
+ *
+ * @component
+ * @returns {JSX.Element} The EditVenue component.
+ */
 const EditVenue = () => {
   const { venueId } = useParams();
   const { venueData, loading, error, updateData } = useVenueData(venueId);

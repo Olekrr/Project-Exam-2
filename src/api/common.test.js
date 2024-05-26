@@ -19,11 +19,19 @@ describe("apiRequest", () => {
     );
   });
 
+  /**
+   * Test the success response of apiRequest.
+   * @returns {Promise<void>}
+   */
   it("should return parsed JSON on success", async () => {
     const response = await apiRequest("/test-endpoint", "GET");
     expect(response).toEqual({ message: "Success" });
   });
 
+  /**
+   * Test the handling of a 401 error response from apiRequest.
+   * @returns {Promise<void>}
+   */
   it("should handle 401 error", async () => {
     global.fetch.mockImplementationOnce(() =>
       Promise.resolve({
@@ -37,6 +45,10 @@ describe("apiRequest", () => {
     );
   });
 
+  /**
+   * Test the handling of JSON parsing errors in apiRequest.
+   * @returns {Promise<void>}
+   */
   it("should handle JSON parsing error", async () => {
     global.fetch.mockImplementationOnce(() =>
       Promise.resolve({

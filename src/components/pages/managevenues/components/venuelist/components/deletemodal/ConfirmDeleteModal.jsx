@@ -1,6 +1,16 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
 
+/**
+ * ConfirmDeleteModal component to confirm deletion of a venue.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {boolean} props.show - Whether the modal is shown.
+ * @param {function} props.handleClose - Function to handle closing the modal.
+ * @param {function} props.handleConfirm - Function to handle confirming the deletion.
+ * @returns {JSX.Element} - The rendered component.
+ */
 const ConfirmDeleteModal = ({ show, handleClose, handleConfirm }) => {
   return (
     <Modal show={show} onHide={handleClose}>

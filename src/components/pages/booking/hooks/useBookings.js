@@ -3,6 +3,12 @@ import { getAllBookings } from "../../../../api/bookings";
 import { getVenueById } from "../../../../api/venues";
 import { useAuth } from "../../../../contexts/authContext";
 
+/**
+ * Custom hook to manage bookings and venue details.
+ *
+ * @param {string} venueId - The ID of the venue.
+ * @returns {Object} - The bookings, loading state, error state, fetchBookings function, maxGuests, venueDetails, and bookedDates.
+ */
 export const useBookings = (venueId) => {
   const [bookings, setBookings] = useState([]);
   const [venueDetails, setVenueDetails] = useState(null);
@@ -11,6 +17,9 @@ export const useBookings = (venueId) => {
   const [error, setError] = useState(null);
   const { authData } = useAuth();
 
+  /**
+   * Fetches venue details.
+   */
   const fetchVenueDetails = useCallback(async () => {
     const { accessToken, apiKey } = authData;
 
@@ -29,6 +38,9 @@ export const useBookings = (venueId) => {
     }
   }, [venueId, authData]);
 
+  /**
+   * Fetches bookings for the venue.
+   */
   const fetchBookings = useCallback(async () => {
     const { accessToken, apiKey } = authData;
     try {

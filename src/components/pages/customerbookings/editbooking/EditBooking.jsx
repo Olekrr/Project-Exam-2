@@ -6,6 +6,11 @@ import { useAuth } from "../../../../contexts/authContext";
 import BookingUpdateSuccess from "./bookingupdatesuccess/BookingUpdateSuccess";
 import "./editbooking.scss";
 
+/**
+ * EditBooking component for editing an existing booking.
+ *
+ * @component
+ */
 const EditBooking = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -33,6 +38,9 @@ const EditBooking = () => {
     }
   }, [guests, maxGuests]);
 
+  /**
+   * Handles the update booking action.
+   */
   const handleUpdateBooking = async () => {
     const updates = { dateFrom, dateTo, guests: Number(guests) };
     const result = await updateBookingDetails(updates);

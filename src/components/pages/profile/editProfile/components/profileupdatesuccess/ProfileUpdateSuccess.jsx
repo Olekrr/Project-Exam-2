@@ -3,6 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../../../../contexts/authContext";
 import "./profileupdatesuccess.scss";
 
+/**
+ * Component to display a success message after profile update.
+ *
+ * @component
+ * @returns {JSX.Element} The ProfileUpdateSuccess component.
+ */
 const ProfileUpdateSuccess = () => {
   const navigate = useNavigate();
   const { authData } = useAuth();

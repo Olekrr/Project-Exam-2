@@ -3,10 +3,19 @@ import { useNavigate, useParams } from "react-router-dom";
 import VenueList from "./components/venuelist/VenueList";
 import "./managevenues.scss";
 
+/**
+ * ManageVenues component for managing the venues by the user.
+ *
+ * @component
+ * @returns {JSX.Element} - The rendered component.
+ */
 const ManageVenues = () => {
   const { username } = useParams();
   const navigate = useNavigate();
 
+  /**
+   * Handles the back to profile navigation.
+   */
   const handleBackToProfile = () => {
     navigate(`/profile/${username}`);
   };

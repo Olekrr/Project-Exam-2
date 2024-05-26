@@ -1,5 +1,19 @@
 import React from "react";
 
+/**
+ * A reusable textarea input component.
+ *
+ * @component
+ * @param {Object} props - Component properties.
+ * @param {string} props.label - The label for the textarea.
+ * @param {string} props.id - The id for the textarea.
+ * @param {string} props.name - The name attribute for the textarea.
+ * @param {string} props.value - The current value of the textarea.
+ * @param {Function} props.onChange - Function to call when the value changes.
+ * @param {Function} [props.onBlur] - Function to call when the textarea loses focus.
+ * @param {string} [props.error] - Error message to display if validation fails.
+ * @returns {JSX.Element} The TextAreaInput component.
+ */
 const TextAreaInput = ({
   label,
   id,

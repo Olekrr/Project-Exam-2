@@ -1,13 +1,25 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * AuthenticationRequired component to inform users they need to log in to view a venue.
+ * This component displays a message and provides buttons to navigate to the login or register page.
+ *
+ * @component
+ */
 const AuthenticationRequired = () => {
   const navigate = useNavigate();
 
+  /**
+   * Navigate to the login page.
+   */
   const handleLogin = () => {
     navigate("/login");
   };
 
+  /**
+   * Navigate to the register page.
+   */
   const handleRegister = () => {
     navigate("/register");
   };

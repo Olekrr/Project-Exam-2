@@ -3,6 +3,17 @@ import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import "./bookingupdatesuccess.scss";
 
+/**
+ * BookingUpdateSuccess component to show the success message after updating a booking.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {Object} props.booking - The booking details.
+ * @param {string} props.booking.dateFrom - The start date of the booking.
+ * @param {string} props.booking.dateTo - The end date of the booking.
+ * @param {number} props.booking.guests - The number of guests for the booking.
+ * @param {string} props.booking.username - The username of the person who made the booking.
+ */
 const BookingUpdateSuccess = ({ booking }) => {
   const navigate = useNavigate();
 

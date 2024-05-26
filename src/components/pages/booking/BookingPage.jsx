@@ -7,6 +7,12 @@ import BookingForm from "./components/bookingform/BookingForm";
 import { useAuth } from "../../../contexts/authContext";
 import "./bookingpage.scss";
 
+/**
+ * BookingPage component for users to book a stay at a venue.
+ * Displays a calendar with booked dates and a form to create a new booking.
+ *
+ * @component
+ */
 const BookingPage = () => {
   const { venueId } = useParams();
   const { bookings, loading, error, fetchBookings, maxGuests, venueDetails } =
@@ -16,6 +22,10 @@ const BookingPage = () => {
   const [guests, setGuests] = useState(1);
   const { authData } = useAuth();
 
+  /**
+   * Handles date selection from the calendar.
+   * @param {Object} info - Information about the selected date range.
+   */
   const handleDateSelect = (info) => {
     setStartDate(info.startStr);
     const adjustedEndDate = new Date(info.endStr);
@@ -23,6 +33,9 @@ const BookingPage = () => {
     setEndDate(adjustedEndDate.toISOString().split("T")[0]);
   };
 
+  /**
+   * Handles creating a new booking.
+   */
   const handleCreateBooking = async () => {
     const { accessToken, apiKey } = authData;
     const bookingData = {

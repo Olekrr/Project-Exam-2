@@ -3,6 +3,12 @@ import { getProfileByName, updateProfile } from "../../../../../api/profiles";
 import { useAuth } from "../../../../../contexts/authContext";
 import { validateProfileForm } from "./validateEdit";
 
+/**
+ * Custom hook for editing the user profile.
+ *
+ * @param {string} username - The username of the profile to edit.
+ * @returns {Object} The profile data and related handlers.
+ */
 export const useEditProfile = (username) => {
   const [profile, setProfile] = useState({
     name: "",
@@ -51,6 +57,11 @@ export const useEditProfile = (username) => {
     setIsFormValid(Object.keys(errors).length === 0);
   }, [profile]);
 
+  /**
+   * Handles input change and updates the profile state.
+   *
+   * @param {React.ChangeEvent} e - The change event.
+   */
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProfile((prev) => {
@@ -72,6 +83,11 @@ export const useEditProfile = (username) => {
     setError("");
   };
 
+  /**
+   * Handles input blur and sets the touched state.
+   *
+   * @param {React.FocusEvent} e - The blur event.
+   */
   const handleBlur = (e) => {
     const { name } = e.target;
     setTouched((prev) => ({
@@ -80,6 +96,12 @@ export const useEditProfile = (username) => {
     }));
   };
 
+  /**
+   * Updates the profile data.
+   *
+   * @param {Object} profileData - The profile data to update.
+   * @returns {boolean} True if the update is successful, false otherwise.
+   */
   const updateProfileData = async (profileData) => {
     setIsLoading(true);
     try {

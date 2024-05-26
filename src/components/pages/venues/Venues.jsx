@@ -3,6 +3,12 @@ import useVenues from "./hooks/useVenues";
 import VenueCard from "./components/cards/VenueCards";
 import "./venues.scss";
 
+/**
+ * Component to display a list of venues.
+ *
+ * @component
+ * @returns {JSX.Element} The Venues component.
+ */
 const Venues = () => {
   const { venues, loading, error } = useVenues();
 
@@ -16,8 +22,9 @@ const Venues = () => {
         <p className="lead">
           Explore a variety of venues perfect for any occasion. Whether
           you&apos;re planning a wedding, corporate event, or a family
-          gathering, we have the perfect venue for you. Browse through our
-          selection and find the one that suits your needs.
+          gathering, or simply going on holiday we have the perfect venue for
+          you. Browse through our selection and find the one that suits your
+          needs.
         </p>
       </div>
       <div className="row">

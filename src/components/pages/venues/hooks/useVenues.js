@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 import { getAllVenues } from "../../../../api/venues";
 
+/**
+ * Custom hook to fetch and manage the state of venues.
+ *
+ * @returns {Object} The state of the venues, including venues data, loading status, and error status.
+ */
 const useVenues = () => {
   const [venues, setVenues] = useState([]);
   const [loading, setLoading] = useState(true);

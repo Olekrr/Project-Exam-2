@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
 
+/**
+ * Custom hook for managing form state.
+ *
+ * @param {Object} initialValues - The initial values of the form fields.
+ * @returns {Array} An array containing the form data and a function to handle input changes.
+ */
 const useForm = (initialValues) => {
   const [formData, setFormData] = useState(initialValues);
 
@@ -7,6 +13,11 @@ const useForm = (initialValues) => {
     setFormData(initialValues);
   }, [initialValues]);
 
+  /**
+   * Handles input changes and updates the form state.
+   *
+   * @param {Event} e - The input change event.
+   */
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => {

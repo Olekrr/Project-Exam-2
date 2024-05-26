@@ -6,6 +6,12 @@ import VenueCard from "./components/venuecards/VenueCards";
 import { searchVenues } from "../../../api/venues";
 import "./home.scss";
 
+/**
+ * Home component for searching and displaying venues.
+ *
+ * @component
+ * @returns {JSX.Element} - The rendered component.
+ */
 const Home = () => {
   const [simpleQuery, setSimpleQuery] = useState("");
   const [simpleResults, setSimpleResults] = useState([]);
@@ -23,6 +29,9 @@ const Home = () => {
 
   const searchResultsRef = useRef(null);
 
+  /**
+   * Scrolls the screen to the search results container.
+   */
   const scrollToResults = () => {
     if (searchResultsRef.current) {
       searchResultsRef.current.scrollIntoView({ behavior: "smooth" });
@@ -38,6 +47,9 @@ const Home = () => {
     }
   }, [simpleResults, filteredVenues, searchInitiated]);
 
+  /**
+   * Handles the simple search functionality.
+   */
   const handleSimpleSearch = async () => {
     if (!simpleQuery.trim()) {
       alert("Search query cannot be empty");
@@ -48,17 +60,20 @@ const Home = () => {
       setSimpleSearchInitiated(true);
       const results = await searchVenues(simpleQuery);
       setSimpleResults(results.data || []);
-      setSearchInitiated(true); // Mark search as initiated for simple search as well
+      setSearchInitiated(true);
     } catch (error) {
       console.error("Error searching venues:", error);
     }
   };
 
+  /**
+   * Toggles between simple and advanced search modes.
+   */
   const toggleSearchMode = () => {
     setIsAdvancedSearch(!isAdvancedSearch);
     setSimpleResults([]);
     setSimpleSearchInitiated(false);
-    setSearchInitiated(false); // Reset search initiation state when toggling search mode
+    setSearchInitiated(false);
   };
 
   return (

@@ -6,6 +6,12 @@ import ProfileBanner from "./components/banner/ProfileBanner";
 import ProfileDetails from "./components/details/ProfileDetails";
 import "./profile.scss";
 
+/**
+ * Profile component to display user profile details.
+ *
+ * @component
+ * @returns {JSX.Element} The Profile component.
+ */
 const Profile = () => {
   const { username } = useParams();
   const navigate = useNavigate();

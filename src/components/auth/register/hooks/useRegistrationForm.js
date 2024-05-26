@@ -3,6 +3,23 @@ import { useNavigate } from "react-router-dom";
 import { registerUser } from "../../../../api/auth";
 import { validateForm } from "./useValidation";
 
+/**
+ * Custom hook to manage the registration form state and handle form submission.
+ * @param {Object} initialState - The initial state of the form data.
+ * @param {string} initialState.name - The initial name value.
+ * @param {string} initialState.email - The initial email value.
+ * @param {string} initialState.password - The initial password value.
+ * @param {boolean} initialState.venueManager - The initial venue manager value.
+ * @returns {Object} - An object containing the form state and handlers.
+ * @returns {Object} formData - The current form data.
+ * @returns {string} error - The error message.
+ * @returns {Object} formErrors - The form validation errors.
+ * @returns {Object} touched - The fields that have been touched.
+ * @returns {boolean} isFormValid - Whether the form is valid.
+ * @returns {Function} handleChange - The function to handle input changes.
+ * @returns {Function} handleBlur - The function to handle input blur events.
+ * @returns {Function} handleSubmit - The function to handle form submission.
+ */
 const useRegistrationForm = (initialState) => {
   const [formData, setFormData] = useState(initialState);
   const [error, setError] = useState("");
@@ -21,6 +38,10 @@ const useRegistrationForm = (initialState) => {
     setIsFormValid(Object.keys(errors).length === 0);
   }, [formData]);
 
+  /**
+   * Handles input changes and updates the form data.
+   * @param {React.ChangeEvent<HTMLInputElement>} e - The change event.
+   */
   const handleChange = (e) => {
     const { id, value, checked, type } = e.target;
     setFormData((prev) => ({
@@ -30,6 +51,10 @@ const useRegistrationForm = (initialState) => {
     setError("");
   };
 
+  /**
+   * Handles input blur events and updates the touched state.
+   * @param {React.FocusEvent<HTMLInputElement>} e - The blur event.
+   */
   const handleBlur = (e) => {
     const { id } = e.target;
     setTouched((prev) => ({
@@ -38,6 +63,10 @@ const useRegistrationForm = (initialState) => {
     }));
   };
 
+  /**
+   * Handles form submission, validates the form, and submits the data.
+   * @param {React.FormEvent<HTMLFormElement>} e - The form submission event.
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");

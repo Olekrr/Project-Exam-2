@@ -21,6 +21,12 @@ const defaultVenueData = {
   }
 };
 
+/**
+ * Custom hook to manage venue data and operations.
+ *
+ * @param {string} venueId - The ID of the venue to fetch and update.
+ * @returns {Object} An object containing venue data, loading state, error message, and update function.
+ */
 export const useVenueData = (venueId) => {
   const [venueData, setVenueData] = useState(defaultVenueData);
   const [loading, setLoading] = useState(false);

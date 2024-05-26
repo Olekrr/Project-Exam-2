@@ -2,10 +2,21 @@ import { useNavigate } from "react-router-dom";
 import { createVenue } from "../../../../../../api/venues";
 import { useAuth } from "../../../../../../contexts/authContext";
 
+/**
+ * Custom hook for handling venue submission.
+ *
+ * @returns {Function} A function to handle venue submission.
+ */
 const useSubmitVenue = () => {
   const navigate = useNavigate();
   const { authData } = useAuth();
 
+  /**
+   * Submits the venue data.
+   *
+   * @param {Object} formData - The form data of the venue.
+   * @param {string} username - The username of the authenticated user.
+   */
   const handleSubmit = async (formData, username) => {
     const { accessToken, apiKey } = authData;
 

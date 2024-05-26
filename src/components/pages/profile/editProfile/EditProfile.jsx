@@ -4,6 +4,12 @@ import { useEditProfile } from "./hooks/useEditProfile";
 import TextInput from "../../../utils/textinput/TextInput";
 import TextAreaInput from "../../../utils/textareainput/TextAreaInput";
 
+/**
+ * Component for editing the user profile.
+ *
+ * @component
+ * @returns {JSX.Element} The EditProfile component.
+ */
 const EditProfile = () => {
   const { username } = useParams();
   const navigate = useNavigate();
@@ -19,6 +25,11 @@ const EditProfile = () => {
     updateProfileData
   } = useEditProfile(username);
 
+  /**
+   * Handles form submission to update the profile.
+   *
+   * @param {React.FormEvent} e - The form submission event.
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     const updated = await updateProfileData(profile);

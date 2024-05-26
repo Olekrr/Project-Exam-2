@@ -3,6 +3,12 @@ import TextInput from "../../utils/textinput/TextInput";
 import CheckboxInput from "../../utils/checkboxinput/CheckboxInput";
 import useRegistrationForm from "./hooks/useRegistrationForm";
 
+/**
+ * Register component for user registration.
+ * This component renders a registration form where users can input their details to create a new account.
+ * @component
+ * @returns {JSX.Element} The rendered Register component.
+ */
 const Register = () => {
   const initialFormData = {
     name: "",
