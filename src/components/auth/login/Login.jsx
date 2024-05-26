@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TextInput from "../../utils/textinputintermediate/TextInput.intermediate";
+import TextInput from "../../utils/textinput/TextInput";
 import { useAuth } from "../../../contexts/authContext";
 import "./login.scss";
 
