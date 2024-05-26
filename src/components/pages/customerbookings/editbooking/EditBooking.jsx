@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import TextInput from "../../../utils/textInput/textInput";
+import TextInput from "../../../utils/textinput/TextInput";
 import { useBooking } from "./hooks/useBooking";
 import { useAuth } from "../../../../contexts/authContext";
 import BookingUpdateSuccess from "./bookingupdatesuccess/BookingUpdateSuccess";
@@ -10,11 +10,12 @@ const EditBooking = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { authData } = useAuth();
-  const { booking, error, updateBookingDetails } = useBooking(id);
+  const { booking, maxGuests, error, updateBookingDetails } = useBooking(id);
   const [dateFrom, setDateFrom] = useState(booking?.dateFrom || "");
   const [dateTo, setDateTo] = useState(booking?.dateTo || "");
   const [guests, setGuests] = useState(booking?.guests || 1);
   const [updateSuccess, setUpdateSuccess] = useState(false);
+  const [validationMessage, setValidationMessage] = useState("");
 
   useEffect(() => {
     if (booking) {
@@ -23,6 +24,14 @@ const EditBooking = () => {
       setGuests(booking.guests);
     }
   }, [booking]);
+
+  useEffect(() => {
+    if (guests > maxGuests) {
+      setValidationMessage(`The number of guests cannot exceed ${maxGuests}.`);
+    } else {
+      setValidationMessage("");
+    }
+  }, [guests, maxGuests]);
 
   const handleUpdateBooking = async () => {
     const updates = { dateFrom, dateTo, guests: Number(guests) };
@@ -70,12 +79,17 @@ const EditBooking = () => {
             type="number"
             value={guests}
             onChange={(e) => setGuests(e.target.value)}
+            max={maxGuests}
           />
+          {validationMessage && (
+            <p className="validation-message">{validationMessage}</p>
+          )}
           <div className="button-group mt-3">
             <button
               type="button"
               className="btn btn-primary"
               onClick={handleUpdateBooking}
+              disabled={guests > maxGuests}
             >
               Save Changes
             </button>

@@ -1,11 +1,36 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { getBookingById, updateBooking } from "../../../../../api/bookings";
+import { getVenueById } from "../../../../../api/venues";
 import { useAuth } from "../../../../../contexts/authContext";
 
 export const useBooking = (bookingId) => {
   const [booking, setBooking] = useState(null);
+  const [venueDetails, setVenueDetails] = useState(null);
+  const [maxGuests, setMaxGuests] = useState(0);
   const [error, setError] = useState("");
   const { authData } = useAuth();
+
+  const fetchVenueDetails = useCallback(
+    async (venueId) => {
+      if (!authData.accessToken || !venueId) {
+        setError("No access token or venue ID available. Please log in again.");
+        return;
+      }
+      try {
+        const venueResponse = await getVenueById(
+          venueId,
+          authData.accessToken,
+          authData.apiKey
+        );
+        setVenueDetails(venueResponse);
+        setMaxGuests(venueResponse.maxGuests || 0);
+      } catch (error) {
+        console.error("Failed to fetch venue details:", error);
+        setError("Failed to fetch venue details.");
+      }
+    },
+    [authData.accessToken, authData.apiKey]
+  );
 
   useEffect(() => {
     if (!bookingId) {
@@ -22,13 +47,22 @@ export const useBooking = (bookingId) => {
         const response = await getBookingById(
           bookingId,
           authData.accessToken,
-          authData.apiKey
+          authData.apiKey,
+          { _venue: true }
         );
-        setBooking({
+        const bookingData = {
           ...response.data,
           dateFrom: response.data.dateFrom.split("T")[0],
           dateTo: response.data.dateTo.split("T")[0]
-        });
+        };
+        setBooking(bookingData);
+
+        const venueId = response.data.venue?.id;
+        if (venueId) {
+          await fetchVenueDetails(venueId);
+        } else {
+          setError("No venue ID associated with this booking.");
+        }
       } catch (error) {
         console.error("Failed to fetch booking:", error);
         setError("Failed to fetch booking.");
@@ -36,7 +70,7 @@ export const useBooking = (bookingId) => {
     };
 
     fetchBooking();
-  }, [bookingId, authData.accessToken, authData.apiKey]);
+  }, [bookingId, authData.accessToken, authData.apiKey, fetchVenueDetails]);
 
   const updateBookingDetails = async (updates) => {
     try {
@@ -54,5 +88,5 @@ export const useBooking = (bookingId) => {
     }
   };
 
-  return { booking, error, updateBookingDetails };
+  return { booking, venueDetails, maxGuests, error, updateBookingDetails };
 };

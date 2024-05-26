@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TextInput from "../../../../utils/textInput/textInput";
+import TextInput from "../../../../utils/textinput/TextInput";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./bookingform.scss";

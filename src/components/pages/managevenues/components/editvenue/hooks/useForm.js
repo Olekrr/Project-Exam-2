@@ -32,6 +32,9 @@ const useForm = (initialValues) => {
             ref[key] = value;
           }
         } else {
+          if (!ref[key]) {
+            ref[key] = typeof keys[idx + 1] === "number" ? [] : {};
+          }
           ref = ref[key];
         }
       });

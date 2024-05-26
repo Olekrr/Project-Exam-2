@@ -1,8 +1,8 @@
 import React from "react";
 
-const CheckboxInput = ({ label, id, checked, onChange, name }) => {
+const CheckboxInput = ({ label, id, name, checked, onChange }) => {
   return (
-    <div className="mb-3 form-check">
+    <div className="form-group form-check">
       <input
         type="checkbox"
         className="form-check-input"

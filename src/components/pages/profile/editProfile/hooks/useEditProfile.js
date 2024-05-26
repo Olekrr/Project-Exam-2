@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getProfileByName, updateProfile } from "../../../../../api/profiles";
 import { useAuth } from "../../../../../contexts/authContext";
+import { validateProfileForm } from "./validateEdit";
 
 export const useEditProfile = (username) => {
   const [profile, setProfile] = useState({
@@ -13,6 +14,9 @@ export const useEditProfile = (username) => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [formErrors, setFormErrors] = useState({});
+  const [touched, setTouched] = useState({});
+  const [isFormValid, setIsFormValid] = useState(false);
   const { authData } = useAuth();
 
   useEffect(() => {
@@ -37,6 +41,45 @@ export const useEditProfile = (username) => {
     fetchProfileData();
   }, [username, authData]);
 
+  useEffect(() => {
+    const validationErrors = validateProfileForm(profile);
+    const errors = validationErrors.reduce((acc, err) => {
+      acc[err.field] = err.message;
+      return acc;
+    }, {});
+    setFormErrors(errors);
+    setIsFormValid(Object.keys(errors).length === 0);
+  }, [profile]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setProfile((prev) => {
+      const keys = name.split(".");
+      if (keys.length > 1) {
+        return {
+          ...prev,
+          [keys[0]]: {
+            ...prev[keys[0]],
+            [keys[1]]: value
+          }
+        };
+      }
+      return {
+        ...prev,
+        [name]: value
+      };
+    });
+    setError("");
+  };
+
+  const handleBlur = (e) => {
+    const { name } = e.target;
+    setTouched((prev) => ({
+      ...prev,
+      [name]: true
+    }));
+  };
+
   const updateProfileData = async (profileData) => {
     setIsLoading(true);
     try {
@@ -56,7 +99,12 @@ export const useEditProfile = (username) => {
     profile,
     isLoading,
     error,
+    formErrors,
+    touched,
+    isFormValid,
     setProfile,
+    handleChange,
+    handleBlur,
     updateProfileData
   };
 };

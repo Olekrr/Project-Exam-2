@@ -9,9 +9,10 @@ export const getAllBookings = (accessToken, apiKey) => {
   return apiRequest(url, "GET", accessToken, null, apiKey);
 };
 
-export const getBookingById = (id, accessToken, apiKey) =>
-  apiRequest(`/holidaze/bookings/${id}`, "GET", accessToken, null, apiKey);
-
+export const getBookingById = (id, accessToken, apiKey) => {
+  const url = `/holidaze/bookings/${id}?_venue=true`;
+  return apiRequest(url, "GET", accessToken, null, apiKey);
+};
 export const createBooking = (bookingData, accessToken, apiKey) =>
   apiRequest("/holidaze/bookings", "POST", accessToken, bookingData, apiKey);
 

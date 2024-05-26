@@ -2,7 +2,32 @@
 
 .footer {
   background-color: map-get($theme-colors, "light");
+  color: map-get($theme-colors, "dark");
+  padding: 20px 0;
   text-align: center;
-  padding: 1rem 0;
-  flex-shrink: 0;
+  font-size: 1rem;
+  border-top: 1px solid map-get($theme-colors, "secondary");
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    font-size: 0.9rem;
+
+    .container {
+      padding: 1rem 0;
+    }
+  }
 }

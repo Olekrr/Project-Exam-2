@@ -16,6 +16,12 @@
     .btn {
       margin-top: 1rem;
     }
+
+    .validation-message {
+      color: map-get($theme-colors, "danger");
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+    }
   }
 
   .button-group {

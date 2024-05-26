@@ -17,6 +17,7 @@ import EditBooking from "./components/pages/customerbookings/editbooking/EditBoo
 import VenueBookings from "./components/pages/managevenues/components/venuebookings/VenueBookings";
 import Welcome from "./components/pages/welcomepage/Welcome";
 import ProfileUpdateSuccess from "./components/pages/profile/editProfile/components/profileupdatesuccess/ProfileUpdateSuccess";
+import AuthenticationRequired from "./components/pages/authenticationrequired/AuthenticationRequired";
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
           element={<VenueBookings />}
         />
         <Route path="/welcome" element={<Welcome />} />
+        <Route path="/auth-required" element={<AuthenticationRequired />} />
       </Routes>
     </Layout>
   );

@@ -50,24 +50,39 @@
       width: 50%;
       text-align: left;
       margin-bottom: 2rem;
+      z-index: 9;
 
       .form-group,
       .d-flex {
         width: 100%;
       }
 
+      .advanced-search .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+
+      .form-group {
+        margin-bottom: 1rem;
+        flex: 1 1 45%;
+        min-width: 45%;
+      }
+
       .checkbox-container {
+        margin-top: 1rem;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        margin-top: 1rem;
+        flex: 0 0 100px;
+        margin-left: 1rem;
+        margin-top: 25px;
       }
 
       .form-check {
+        margin-top: 0;
         display: flex;
         align-items: center;
-        margin-bottom: 0;
-        margin-top: 27px;
+        margin-bottom: 0.5rem;
       }
 
       .form-check-input {

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import TextInput from "../../utils/textInput/textInput";
-import CheckboxInput from "../../utils/checkboxInput/CheckboxInput";
+import React, { useState, useRef, useEffect } from "react";
+import TextInput from "../../utils/textinput/TextInput";
+import CheckboxInput from "../../utils/checkboxinput/CheckboxInput";
 import { useVenueSearch } from "./hooks/useVenueSearch";
 import VenueCard from "./components/venuecards/VenueCards";
 import { searchVenues } from "../../../api/venues";
@@ -10,13 +10,33 @@ const Home = () => {
   const [simpleQuery, setSimpleQuery] = useState("");
   const [simpleResults, setSimpleResults] = useState([]);
   const [isAdvancedSearch, setIsAdvancedSearch] = useState(false);
+  const [simpleSearchInitiated, setSimpleSearchInitiated] = useState(false);
+
   const {
     filters,
     handleChange,
     handleSearch: handleAdvancedSearch,
     filteredVenues,
-    searchInitiated
+    searchInitiated,
+    setSearchInitiated
   } = useVenueSearch();
+
+  const searchResultsRef = useRef(null);
+
+  const scrollToResults = () => {
+    if (searchResultsRef.current) {
+      searchResultsRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  useEffect(() => {
+    if (
+      simpleResults.length > 0 ||
+      (searchInitiated && filteredVenues.length > 0)
+    ) {
+      scrollToResults();
+    }
+  }, [simpleResults, filteredVenues, searchInitiated]);
 
   const handleSimpleSearch = async () => {
     if (!simpleQuery.trim()) {
@@ -25,8 +45,10 @@ const Home = () => {
     }
 
     try {
+      setSimpleSearchInitiated(true);
       const results = await searchVenues(simpleQuery);
       setSimpleResults(results.data || []);
+      setSearchInitiated(true); // Mark search as initiated for simple search as well
     } catch (error) {
       console.error("Error searching venues:", error);
     }
@@ -35,6 +57,8 @@ const Home = () => {
   const toggleSearchMode = () => {
     setIsAdvancedSearch(!isAdvancedSearch);
     setSimpleResults([]);
+    setSimpleSearchInitiated(false);
+    setSearchInitiated(false); // Reset search initiation state when toggling search mode
   };
 
   return (
@@ -59,6 +83,7 @@ const Home = () => {
                 <TextInput
                   label="Search Venue"
                   id="simpleSearch"
+                  name="simpleSearch"
                   value={simpleQuery}
                   onChange={(e) => setSimpleQuery(e.target.value)}
                 />
@@ -74,7 +99,9 @@ const Home = () => {
                   Advanced Search
                 </button>
               </div>
-              {simpleResults.length === 0 && <p>No venues found.</p>}
+              {simpleSearchInitiated && simpleResults.length === 0 && (
+                <p className="no-venues-message">No venues found.</p>
+              )}
             </div>
           ) : (
             <div className="advanced-search card p-4">
@@ -90,24 +117,28 @@ const Home = () => {
                   <TextInput
                     label="Venue Name"
                     id="name"
+                    name="name"
                     value={filters.name}
                     onChange={handleChange}
                   />
                   <TextInput
                     label="City"
                     id="city"
+                    name="city"
                     value={filters.city}
                     onChange={handleChange}
                   />
                   <TextInput
                     label="Address"
                     id="address"
+                    name="address"
                     value={filters.address}
                     onChange={handleChange}
                   />
                   <TextInput
                     label="Zip"
                     id="zip"
+                    name="zip"
                     value={filters.zip}
                     onChange={handleChange}
                   />
@@ -117,6 +148,7 @@ const Home = () => {
                   <TextInput
                     label="Price"
                     id="price"
+                    name="price"
                     type="number"
                     value={filters.price}
                     onChange={handleChange}
@@ -124,12 +156,14 @@ const Home = () => {
                   <TextInput
                     label="Country"
                     id="country"
+                    name="country"
                     value={filters.country}
                     onChange={handleChange}
                   />
                   <TextInput
                     label="Rating"
                     id="rating"
+                    name="rating"
                     type="number"
                     value={filters.rating}
                     onChange={handleChange}
@@ -137,6 +171,7 @@ const Home = () => {
                   <TextInput
                     label="Continent"
                     id="continent"
+                    name="continent"
                     value={filters.continent}
                     onChange={handleChange}
                   />
@@ -179,15 +214,17 @@ const Home = () => {
                   </button>
                 </div>
               </form>
+              {searchInitiated && filteredVenues.length === 0 && (
+                <p className="no-venues-message">
+                  No venues found based on the search criteria.
+                </p>
+              )}
             </div>
           )}
         </div>
-        <div className="search-results">
+        <div className="search-results" ref={searchResultsRef}>
           {isAdvancedSearch && searchInitiated && (
             <>
-              {filteredVenues.length === 0 && (
-                <p>No venues found based on the search criteria.</p>
-              )}
               {filteredVenues.map((venue) => (
                 <VenueCard key={venue.id} venue={venue} />
               ))}
