@@ -31,7 +31,10 @@ export const validateBio = (bio) => {
  */
 export const validateURL = (url, field) => {
   if (!isValidURL(url)) {
-    return { field, message: `${field} must be a valid URL.` };
+    return {
+      field,
+      message: `${field} must be a valid URL and not exceed 300 characters`
+    };
   }
   return null;
 };

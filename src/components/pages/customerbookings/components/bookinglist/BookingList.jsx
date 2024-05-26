@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import ConfirmDeleteModal from "./components/confirmdeletemodal/ConfirmDeleteModal";
 import "./bookinglist.scss";
 
 /**
@@ -22,37 +23,64 @@ const formatDate = (dateString) => {
  * @param {function} props.onDelete - Function to handle deleting a booking.
  */
 const BookingList = ({ bookings, onEdit, onDelete }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [bookingToDelete, setBookingToDelete] = useState(null);
+
   if (bookings.length === 0) {
     return <p>No upcoming bookings found.</p>;
   }
 
+  const handleDeleteClick = (booking) => {
+    setBookingToDelete(booking);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setBookingToDelete(null);
+  };
+
+  const handleConfirmDelete = () => {
+    if (bookingToDelete) {
+      onDelete(bookingToDelete.id);
+    }
+    handleCloseModal();
+  };
+
   return (
-    <ul className="booking-list">
-      {bookings.map((booking) => (
-        <li key={booking.id} className="booking-item">
-          <div className="booking-info">
-            <span>
-              {formatDate(booking.dateFrom)} - {formatDate(booking.dateTo)}:
-              Guests {booking.guests}
-            </span>
-          </div>
-          <div className="booking-actions">
-            <button
-              onClick={() => onEdit(booking.id)}
-              className="btn btn-primary"
-            >
-              Edit
-            </button>
-            <button
-              onClick={() => onDelete(booking.id)}
-              className="btn btn-danger"
-            >
-              Delete
-            </button>
-          </div>
-        </li>
-      ))}
-    </ul>
+    <div>
+      <ul className="booking-list">
+        {bookings.map((booking) => (
+          <li key={booking.id} className="booking-item">
+            <div className="booking-info">
+              <span>
+                {formatDate(booking.dateFrom)} - {formatDate(booking.dateTo)}:
+                Guests {booking.guests}
+              </span>
+            </div>
+            <div className="booking-actions">
+              <button
+                onClick={() => onEdit(booking.id)}
+                className="btn btn-primary"
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => handleDeleteClick(booking)}
+                className="btn btn-danger"
+              >
+                Delete
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <ConfirmDeleteModal
+        show={showModal}
+        handleClose={handleCloseModal}
+        handleConfirm={handleConfirmDelete}
+      />
+    </div>
   );
 };
 
